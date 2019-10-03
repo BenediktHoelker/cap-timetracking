@@ -18,5 +18,25 @@
     },
     "devDependencies": {
         "sqlite3": "^4.1.0"
+    },
+    "cds": {
+        "requires": {
+          "db": {
+             "kind": "sqlite",
+             "model": [
+                 "db", 
+                 "srv"
+             ],
+             "credentials": {
+                 "database": "timetracking.db"
+             },
+             "[production]": {
+                 "kind": "hana"
+             }
+          }
+        },
+        "odata": {
+            "version": "v4"
+        }
     }
 }

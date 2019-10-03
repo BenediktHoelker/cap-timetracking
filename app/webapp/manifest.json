@@ -1,7 +1,7 @@
 {
     "_version": "1.8.0",
     "sap.app": {
-        "id": "iot.timetracking",
+        "id": "timetracking",
         "type": "application",
         "title": "Edit Employees",
         "description": "Sample Application",
@@ -46,7 +46,7 @@
             "routes": [{
                     "pattern": "",
                     "name": "Employees",
-                    "target": "EmpyloyeesList"
+                    "target": "EmployeesList"
                 },
                 {
                     "pattern": "Employees({key})",
