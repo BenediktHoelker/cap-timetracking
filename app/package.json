@@ -1,0 +1,12 @@
+{
+    "name": "timetracking-ui",
+    "dependencies": {
+      "@sap/approuter": "^6.0.1"
+    },
+    "engines": {
+        "node": "^10"
+    },
+    "scripts": {
+      "start": "node node_modules/@sap/approuter/approuter.js"
+    }
+  }

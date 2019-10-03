@@ -28,4 +28,4 @@ resources:
     properties:
       hdi-container-name: ${service-name}
     parameters:
-      service: hana
+      service: hanatrial
