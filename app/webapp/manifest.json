@@ -29,17 +29,12 @@
             },
             "": {
                 "dataSource": "TimetrackingService",
-                "settings": {
-                    "synchronizationMode": "None",
-                    "operationMode": "Server",
-                    "autoExpandSelect": true,
-                    "earlyRequests": true,
-                    "groupProperties": {
-                        "default": {
-                            "submit": "Auto"
-                        }
-                    }
-                }
+				"settings": {
+					"operationMode": "Server",
+					"groupId": "$auto",
+					"synchronizationMode": "None",
+					"autoExpandSelect": true
+				}
             }
         },
         "routing": {
