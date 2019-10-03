@@ -1,0 +1,88 @@
+{
+    "_version": "1.8.0",
+    "sap.app": {
+        "id": "iot.timetracking",
+        "type": "application",
+        "title": "Edit Employees",
+        "description": "Sample Application",
+        "i18n": "i18n/i18n.properties",
+        "dataSources": {
+            "TimetrackingService": {
+                "uri": "/timetracking/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0"
+                }
+            }
+        }
+    },
+    "sap.ui5": {
+        "dependencies": {
+            "libs": {
+                "sap.fe": {}
+            }
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "": {
+                "dataSource": "TimetrackingService",
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true,
+                    "groupProperties": {
+                        "default": {
+                            "submit": "Auto"
+                        }
+                    }
+                }
+            }
+        },
+        "routing": {
+            "routes": [{
+                    "pattern": "",
+                    "name": "Employees",
+                    "target": "EmpyloyeesList"
+                },
+                {
+                    "pattern": "Employees({key})",
+                    "name": "EmployeesDetails",
+                    "target": "EmployeesDetails"
+                }
+            ],
+            "targets": {
+                "EmployeesList": {
+                    "type": "Component",
+                    "id": "EmployeesList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "entitySet": "Employees",
+                            "navigation": {
+                                "Employees": {
+                                    "detail": {
+                                        "route": "EmployeesDetails"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "EmployeesDetails": {
+                    "type": "Component",
+                    "id": "EmployeesDetails",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "entitySet": "Employees"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
