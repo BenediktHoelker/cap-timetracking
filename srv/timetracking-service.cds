@@ -1,8 +1,8 @@
-using timetracking as my from '../db/schema';
+using my.timetracking from '../db/schema';
 
 service TimetrackingService {
-    entity Records as projection on my.Records;
-    entity Projects as projection on my.Projects;
-    entity Employees as projection on my.Employees;
-    entity Packages as projection on my.Packages;
+    entity Records as projection on timetracking.Records;
+    entity Projects as projection on timetracking.Projects;
+    entity Employees as projection on timetracking.Employees;
+    entity Packages as projection on timetracking.Packages;
 }

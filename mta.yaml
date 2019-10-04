@@ -1,13 +1,13 @@
 _schema-version: 2.0.0
 ID: timetracking
-version: 1.0.0
+version: 1.0.3
 modules:
   - name: timetracking-db
     type: hdb
     path: db
     parameters:
-      memory: 256M
-      disk-quota: 256M
+      memory: 1024M
+      disk-quota: 1024M
     requires:
       - name: timetracking-db-hdi-container
   - name: timetracking-srv
@@ -22,6 +22,20 @@ modules:
           url: ${default-url}
     requires:
       - name: timetracking-db-hdi-container
+  - name: timetracking-ui
+    type: nodejs
+    path: app
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: srv_api
+        group: destinations
+        properties: 
+          forwardAuthToken: true
+          strictSSL: true
+          name: srv_api
+          url: ~{url}
 resources:
   - name: timetracking-db-hdi-container
     type: com.sap.xs.hdi-container

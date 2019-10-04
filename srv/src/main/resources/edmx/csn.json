@@ -47,7 +47,7 @@
     },
     "TimetrackingService": {
       "kind": "service",
-      "@source": "srv\\timetracking-service.cds"
+      "@source": "srv/timetracking-service.cds"
     },
     "TimetrackingService.Employees": {
       "kind": "entity",

@@ -13,3 +13,5 @@ connection.properties
 _out
 default-*.json
 package-lock.json
+
+default-env.json
