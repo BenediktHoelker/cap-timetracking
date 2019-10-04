@@ -29,10 +29,7 @@
         "model": [
           "db",
           "srv"
-        ],
-        "credentials": {
-          "database": "db/my.db"
-        }
+        ]
       }
     },
     "odata": {
