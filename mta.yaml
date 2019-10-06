@@ -22,6 +22,20 @@ modules:
           url: ${default-url}
     requires:
       - name: timetracking-db-hdi-container
+  - name: employee-worklist
+    type: nodejs
+    path: employee-worklist
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: srv_api
+        group: destinations
+        properties: 
+          forwardAuthToken: true
+          strictSSL: true
+          name: srv_api
+          url: ~{url}
   - name: timetracking-ui
     type: nodejs
     path: app
