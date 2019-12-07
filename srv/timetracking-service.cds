@@ -9,7 +9,9 @@ service TimetrackingService {
                 title,
                 description,
                 billingFactor,
-                sum(records.time) as totalTime : Decimal(13, 2),
+                sum(records.time) as totalTime :    Decimal(13, 2),
+                0                 as membersCount : Integer,
+                // count(members.employeeID) as membersCount : Integer,
                 members
         }
         group by
@@ -22,9 +24,10 @@ service TimetrackingService {
         select from timetracking.Employees {
             key ID,
                 name,
-                count(recordsView.ID)               as recordsCount : Integer,
-                sum(recordsView.billingTime)        as billingTime :  Double,
-                sum(recordsView.billingTime) / 1440 as bonus :        Double,
+                count(recordsView.ID)               as recordsCount :  Integer,
+                sum(recordsView.billingTime)        as billingTime :   Double,
+                sum(recordsView.billingTime) / 1440 as bonus :         Double,
+                0                                   as projectsCount : Integer,
                 projects,
                 records
         }
