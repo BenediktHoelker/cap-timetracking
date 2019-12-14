@@ -1,18 +1,17 @@
 using my.timetracking from '../db/schema';
 
 service TimetrackingService {
-    entity Records        as select from timetracking.Records;
+    entity Records             as select from timetracking.Records;
 
-    entity Projects       as
+    entity Projects            as
         select from timetracking.Projects {
             key ID,
                 title,
                 description,
                 billingFactor,
-                sum(records.time) as totalTime :    Decimal(13, 2),
-                0                 as membersCount : Integer,
-                // count(members.employeeID) as membersCount : Integer,
-                members
+                sum(records.time) as totalTime : Decimal(13, 2),
+                members,
+                members_db
         }
         group by
             ID,
@@ -20,14 +19,13 @@ service TimetrackingService {
             description,
             billingFactor;
 
-    entity Employees      as
+    entity Employees           as
         select from timetracking.Employees {
             key ID,
                 name,
                 count(recordsView.ID)               as recordsCount :  Integer,
                 sum(recordsView.billingTime)        as billingTime :   Double,
                 sum(recordsView.billingTime) / 1440 as bonus :         Double,
-                0                                   as projectsCount : Integer,
                 projects,
                 records
         }
@@ -35,6 +33,7 @@ service TimetrackingService {
             ID,
             name;
 
-    entity Packages       as projection on timetracking.Packages;
-    entity ProjectMembers as projection on timetracking.ProjectMembers;
+    entity Packages            as projection on timetracking.Packages;
+    entity ProjectMembers      as projection on timetracking.ProjectMembers;
+    entity EmployeesToProjects as projection on timetracking.EmployeesToProjects;
 }
