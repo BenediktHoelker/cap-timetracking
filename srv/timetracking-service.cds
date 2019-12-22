@@ -27,6 +27,7 @@ service TimetrackingService {
                 sum(recordsView.billingTime)        as billingTime :   Double,
                 sum(recordsView.billingTime) / 1440 as bonus :         Double,
                 projects,
+                projects_db,
                 records
         }
         group by
