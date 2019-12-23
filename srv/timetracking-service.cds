@@ -10,8 +10,7 @@ service TimetrackingService {
                 description,
                 billingFactor,
                 sum(records.time) as totalTime : Decimal(13, 2),
-                members,
-                members_db
+                members
         }
         group by
             ID,
@@ -27,7 +26,6 @@ service TimetrackingService {
                 sum(recordsView.billingTime)        as billingTime :   Double,
                 sum(recordsView.billingTime) / 1440 as bonus :         Double,
                 projects,
-                projects_db,
                 records
         }
         group by
@@ -35,6 +33,5 @@ service TimetrackingService {
             name;
 
     entity Packages            as projection on timetracking.Packages;
-    entity ProjectMembers      as projection on timetracking.ProjectMembers;
     entity EmployeesToProjects as projection on timetracking.EmployeesToProjects;
 }
