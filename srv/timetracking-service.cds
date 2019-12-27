@@ -7,6 +7,7 @@ service TimetrackingService {
         select from timetracking.Projects {
             key ID,
                 title,
+                customer,
                 description,
                 billingFactor,
                 sum(records.time) as totalTime : Decimal(13, 2),
@@ -15,6 +16,7 @@ service TimetrackingService {
         group by
             ID,
             title,
+            customer,
             description,
             billingFactor;
 
@@ -22,9 +24,9 @@ service TimetrackingService {
         select from timetracking.Employees {
             key ID,
                 name,
-                count(recordsView.ID)               as recordsCount :  Integer,
-                sum(recordsView.billingTime)        as billingTime :   Double,
-                sum(recordsView.billingTime) / 1440 as bonus :         Double,
+                count(recordsView.ID)               as recordsCount : Integer,
+                sum(recordsView.billingTime)        as billingTime :  Double,
+                sum(recordsView.billingTime) / 1440 as bonus :        Double,
                 projects,
                 records
         }
@@ -34,4 +36,6 @@ service TimetrackingService {
 
     entity Packages            as projection on timetracking.Packages;
     entity EmployeesToProjects as projection on timetracking.EmployeesToProjects;
+    entity Invoices            as projection on timetracking.InvoicesView;
+    entity Customers           as projection on timetracking.CustomersView;
 }
