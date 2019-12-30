@@ -35,7 +35,22 @@ service TimetrackingService {
             name;
 
     entity Packages            as projection on timetracking.Packages;
+
+    entity Customers           as projection on timetracking.CustomersView {
+        * , invoices : redirected to Invoices
+    };
+
+    entity Invoices            as projection on timetracking.Invoices;
+
+    entity InvoiceItems        as projection on timetracking.InvoiceItems {
+        * , invoice : redirected to Invoices
+    };
+
+    entity InvoicesView        as projection on timetracking.InvoicesView;
     entity EmployeesToProjects as projection on timetracking.EmployeesToProjects;
-    entity Invoices            as projection on timetracking.InvoicesView;
-    entity Customers           as projection on timetracking.CustomersView;
+    entity RecordStatus        as projection on timetracking.RecordStatus;
+
+    entity RecordsView         as projection on timetracking.RecordsView {
+        * , invoice : redirected to Invoices
+    };
 }

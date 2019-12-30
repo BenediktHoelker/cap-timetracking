@@ -15,8 +15,3 @@ annotate timetracking.Employees with @(
         }
     }
 );
-
-annotate timetracking.Employees with {
-    ID @title:'{i18n>ID}' @UI.HiddenFilter;
-    name @title:'{i18n>Name}';
-}
