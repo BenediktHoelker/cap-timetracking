@@ -7,8 +7,8 @@ target/
 
 .cds_gen.log
 connection.properties
-*.db/node_modules
-*.db/srv
+db/node_modules
+db/srv
 .DS_Store
 *.orig
 _out
