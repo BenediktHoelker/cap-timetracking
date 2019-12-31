@@ -7,7 +7,6 @@ target/
 
 .cds_gen.log
 connection.properties
-*.db
 .DS_Store
 *.orig
 _out
