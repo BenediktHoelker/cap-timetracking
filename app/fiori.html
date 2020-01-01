@@ -5,32 +5,32 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Bookshop</title>
+	<title>Zeiterfassung</title>
 
 	<script>
 		window["sap-ushell-config"] = {
 			defaultRenderer: "fiori2",
 			applications: {
 				"bill-records": {
-					title: "Bill Records",
-					description: "Create Invoices",
-					additionalInformation: "SAPUI5.Component=iot.timetracking-worklist",
+					title: "Abrechnung",
+					description: "Erzeugen",
+					additionalInformation: "SAPUI5.Component=iot.timetracking.records",
 					applicationType : "URL",
 					url: "/records/webapp",
 					navigationMode: "embedded"
 				},
 				"manage-projects": {
-					title: "Manage Projects",
-					description: "",
-					additionalInformation: "SAPUI5.Component=iot.timetracking-projects-ui",
+					title: "Projekte",
+					description: "Bearbeiten",
+					additionalInformation: "SAPUI5.Component=iot.timetracking.projects",
 					applicationType : "URL",
 					url: "/projects/webapp",
 					navigationMode: "embedded"
 				},
 				"manage-employees": {
-					title: "Manage Employees",
-					description: "",
-					additionalInformation: "SAPUI5.Component=iot.timetracking-worklist",
+					title: "Mitarbeiter",
+					description: "Bearbeiten",
+					additionalInformation: "SAPUI5.Component=iot.timetracking.employees",
 					applicationType : "URL",
 					url: "/employees/webapp",
 					navigationMode: "embedded"
