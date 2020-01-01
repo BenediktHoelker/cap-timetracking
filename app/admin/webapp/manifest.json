@@ -3,12 +3,12 @@
     "sap.app": {
         "id": "admin",
         "type": "application",
-        "title": "Manage Books",
+        "title": "Manage Records",
         "description": "Sample Application",
         "i18n": "i18n/i18n.properties",
         "dataSources": {
             "AdminService": {
-                "uri": "/admin/",
+                "uri": "/timetracking/",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "4.0"
@@ -51,62 +51,62 @@
             "routes": [
                 {
                     "pattern": ":?query:",
-                    "name": "BooksList",
-                    "target": "BooksList"
+                    "name": "RecordsList",
+                    "target": "RecordsList"
                 },
                 {
-                    "pattern": "Books({key}):?query:",
-                    "name": "BooksDetails",
-                    "target": "BooksDetails"
+                    "pattern": "Records({key}):?query:",
+                    "name": "RecordsDetails",
+                    "target": "RecordsDetails"
                 },
                 {
-                    "pattern": "Books({key}/author({key2}):?query:",
-                    "name": "AuthorsDetails",
-                    "target": "AuthorsDetails"
+                    "pattern": "Records({key}/project({key2}):?query:",
+                    "name": "ProjectsDetails",
+                    "target": "ProjectsDetails"
                 }
             ],
             "targets": {
-                "BooksList": {
+                "RecordsList": {
                     "type": "Component",
-                    "id": "BooksList",
+                    "id": "RecordsList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings" : {
-                            "entitySet" : "Books",
+                            "entitySet" : "Records",
                             "navigation" : {
-                                "Books" : {
+                                "Records" : {
                                     "detail" : {
-                                        "route" : "BooksDetails"
+                                        "route" : "RecordsDetails"
                                     }
                                 }
                             }
                         }
                     }
                 },
-                "BooksDetails": {
+                "RecordsDetails": {
                     "type": "Component",
-                    "id": "BooksDetailsList",
+                    "id": "RecordsDetailsList",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings" : {
-                            "entitySet" : "Books",
+                            "entitySet" : "Records",
                             "navigation" : {
-                                "Authors" : {
+                                "Projects" : {
                                     "detail" : {
-                                        "route" : "AuthorsDetails"
+                                        "route" : "ProjectsDetails"
                                     }
                                 }
                             }
                         }
                     }
                 },
-                "AuthorsDetails": {
+                "ProjectsDetails": {
                     "type": "Component",
-                    "id": "AuthorsDetailsList",
+                    "id": "ProjectsDetailsList",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings" : {
-                            "entitySet" : "Authors"
+                            "entitySet" : "Projects"
                         }
                     }
                 }

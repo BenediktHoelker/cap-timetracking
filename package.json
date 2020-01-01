@@ -7,8 +7,7 @@
   "dependencies": {
     "@sap/cds": "^3.20.1",
     "express": "^4.17.1",
-    "hdb": "^0.17.1",
-    "mbt": "^0.3.2"
+    "hdb": "^0.17.1"
   },
   "engines": {
     "node": "^8.9"
@@ -21,7 +20,7 @@
     "deploy:cf": "npm run build:mta && cf deploy mta_archives/${npm_package_name}_${npm_package_version}.mtar"
   },
   "devDependencies": {
-    "sqlite3": "^4.1.0"
+    "sqlite3": "^4.1.1"
   },
   "cds": {
     "requires": {
