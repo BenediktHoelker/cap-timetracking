@@ -3,8 +3,8 @@
     "sap.app": {
         "id": "admin",
         "type": "application",
-        "title": "Manage Records",
-        "description": "Sample Application",
+        "title": "Aufwände bearbeiten",
+        "description": "Management von Aufwänden",
         "i18n": "i18n/i18n.properties",
         "dataSources": {
             "AdminService": {

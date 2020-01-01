@@ -1,9 +1,5 @@
 using TimetrackingService from '../../srv/timetracking-service';
 
-////////////////////////////////////////////////////////////////////////////
-//
-//	Books Object Page
-//
 annotate TimetrackingService.Records with @(UI : {
     Facets              : [
         {
