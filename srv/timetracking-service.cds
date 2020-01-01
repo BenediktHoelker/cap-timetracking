@@ -1,17 +1,23 @@
 using my.timetracking from '../db/schema';
 
 service TimetrackingService {
-    // @odata.draft.enabled
+    @odata.draft.enabled
     entity Records             as select from timetracking.Records;
 
+    @odata.draft.enabled
     entity Projects            as
         select from timetracking.Projects {
             key ID,
                 title,
-                customer,
                 description,
                 billingFactor,
                 sum(records.time) as totalTime : Decimal(13, 2),
+                createdAt,
+                createdBy,
+                modifiedAt,
+                modifiedBy,
+                customer,
+                records,
                 members
         }
         group by
@@ -19,7 +25,11 @@ service TimetrackingService {
             title,
             customer,
             description,
-            billingFactor;
+            billingFactor,
+            createdAt,
+            createdBy,
+            modifiedAt,
+            modifiedBy;
 
     entity Employees           as
         select from timetracking.Employees {

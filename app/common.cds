@@ -5,6 +5,12 @@
 using {my.timetracking as my} from '../db/schema';
 
 annotate my.Records with @(UI : {
+    HeaderInfo      : {
+        TypeName       : '{i18n>Record}',
+        TypeNamePlural : '{i18n>Records}',
+        Title          : {Value : title},
+        Description    : {Value : description}
+    },
     Identification  : [{Value : title}],
     SelectionFields : [
         title,
@@ -28,31 +34,6 @@ annotate my.Records with @(UI : {
         {Value    : time}
     ]
 });
-
-annotate my.Projects with @(UI : {
-    Identification  : [{Value : title}],
-    SelectionFields : [
-        title,
-        description
-    ],
-    LineItem        : [
-        {Value : title},
-        {Value : description}
-    ]
-});
-
-annotate my.Employees with @(UI : {
-    Identification  : [{Value : name}],
-    SelectionFields : [name],
-    LineItem        : [{Value : name}]
-});
-
-annotate my.Records with @(UI : {HeaderInfo : {
-    TypeName       : '{i18n>Record}',
-    TypeNamePlural : '{i18n>Records}',
-    Title          : {Value : title},
-    Description    : {Value : project.title}
-}});
 
 annotate my.Records with {
     ID          @title : '{i18n>RecordID}'  @UI.Hidden;
@@ -78,6 +59,24 @@ annotate my.Records with {
     );
 }
 
+annotate my.Projects with @(UI : {
+    HeaderInfo      : {
+        TypeName       : '{i18n>Project}',
+        TypeNamePlural : '{i18n>Projects}',
+        Title          : {Value : title},
+        Description    : {Value : description}
+    },
+    Identification  : [{Value : title}],
+    SelectionFields : [
+        title,
+        description
+    ],
+    LineItem        : [
+        {Value : title},
+        {Value : description}
+    ]
+});
+
 annotate my.Projects with {
     ID          @(
         Common         : {
@@ -88,6 +87,8 @@ annotate my.Projects with {
         UI    : Hidden
     );
     title       @title : '{i18n>ProjectTitle}';
+    customer    @title : '{i18n>ProjectCustomer}';
+    members     @title : '{i18n>ProjectMembers}';
     description @title : '{i18n>ProjectDescription}';
 }
 
@@ -95,3 +96,14 @@ annotate my.Employees with {
     ID   @title : '{i18n>EmployeeID}'  @UI.HiddenFilter;
     name @title : '{i18n>EmployeeName}';
 }
+
+annotate my.Employees with @(UI : {
+    HeaderInfo      : {
+        TypeName       : '{i18n>Employee}',
+        TypeNamePlural : '{i18n>Employees}',
+        Title          : {Value : name}
+    },
+    Identification  : [{Value : name}],
+    SelectionFields : [name],
+    LineItem        : [{value : name}]
+});
