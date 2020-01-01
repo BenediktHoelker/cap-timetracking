@@ -43,19 +43,19 @@ annotate my.Records with {
     description @title : '{i18n>RecordDescription}'  @UI.MultiLineText;
     project     @(
         Common         : {
-            Text         : project.title,
-            FieldControl : #Mandatory
+            Text             : project.title,
+            FieldControl     : #Mandatory,
+            ValueList.entity : 'Projects'
         },
-        ValueList.entity : 'Projects',
-        title            : '{i18n>Project}'
+        title : '{i18n>Project}'
     );
     employee    @(
         Common         : {
-            Text         : employee.name,
-            FieldControl : #Mandatory
+            Text             : employee.name,
+            FieldControl     : #Mandatory,
+            ValueList.entity : 'Employees'
         },
-        ValueList.entity : 'Employees',
-        title            : '{i18n>Employee}'
+        title : '{i18n>Employee}'
     );
 }
 

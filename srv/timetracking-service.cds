@@ -57,7 +57,10 @@ service TimetrackingService {
     };
 
     entity InvoicesView        as projection on timetracking.InvoicesView;
+
+    @odata.draft.enabled
     entity EmployeesToProjects as projection on timetracking.EmployeesToProjects;
+
     entity RecordStatus        as projection on timetracking.RecordStatus;
 
     entity RecordsView         as projection on timetracking.RecordsView {

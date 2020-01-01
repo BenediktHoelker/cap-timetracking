@@ -21,12 +21,12 @@ annotate TimetrackingService.Records with @(UI : {
     FieldGroup #General : {Data : [
         {Value : title},
         {Value : project_ID},
-        {Value : description},
+        {Value : description}
     ]},
     FieldGroup #Details : {Data : [
         {Value : date},
         {Value : time},
-        {Value : employee_ID},
+        {Value : employee_ID}
     ]},
     FieldGroup #Admin   : {Data : [
         {Value : createdBy},
