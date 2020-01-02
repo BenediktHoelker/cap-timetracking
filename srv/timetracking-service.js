@@ -1,13 +1,13 @@
 const cds = require("@sap/cds");
-const { Records } = cds.entities;
+const { Records, Projects } = cds.entities;
 
 module.exports = srv => {
-  srv.before("DELETE", "Records", req => {
-    if (req.data.status !== "INITIAL") {
-      req.error("409", "The record status is not initial.");
-    }
+  srv.on(["CREATE", "PATCH", "UPDATE"], "Projects", req => {
+    console.log("Hi");
+    const oNewEntry = req.data;
+    delete oNewEntry.totalTime;
+    INSERT.into(Projects).entries(oNewEntry);
   });
-
   srv.before("CREATE", "Invoices", _updateRecords);
 };
 

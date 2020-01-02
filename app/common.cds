@@ -73,28 +73,35 @@ annotate my.Projects with @(UI : {
     ],
     LineItem        : [
         {Value : title},
-        {Value : description}
+        {Value : description},
+        {Value : totalTime},
+        {Value : customer.name}
     ]
 });
 
 annotate my.Projects with {
-    ID          @(
-        Common         : {
+    ID            @(
+        Common           : {
             Text         : title,
             FieldControl : #Mandatory
         },
         title : '{i18n>ProjectID}',
         UI    : Hidden
     );
-    title       @title : '{i18n>ProjectTitle}';
-    customer    @title : '{i18n>ProjectCustomer}';
-    members     @title : '{i18n>ProjectMembers}';
-    description @title : '{i18n>ProjectDescription}';
+    title         @title : '{i18n>ProjectTitle}';
+    customer      @title : '{i18n>ProjectCustomer}';
+    totalTime     @title : '{i18n>ProjectTotalTime}';
+    billingFactor @title : '{i18n>ProjectBillingFactor}';
+    members       @title : '{i18n>ProjectMembers}';
+    description   @title : '{i18n>ProjectDescription}';
 }
 
 annotate my.Employees with {
-    ID   @title : '{i18n>EmployeeID}'  @UI.HiddenFilter;
-    name @title : '{i18n>EmployeeName}';
+    ID           @title : '{i18n>EmployeeID}'  @UI.HiddenFilter;
+    name         @title : '{i18n>EmployeeName}';
+    recordsCount @title : '{i18n>RecordsCount}';
+    billingTime  @title : '{i18n>BillingTime}';
+    bonus        @title : '{i18n>Bonus}';
 }
 
 annotate my.Employees with @(UI : {
@@ -105,5 +112,22 @@ annotate my.Employees with @(UI : {
     },
     Identification  : [{Value : name}],
     SelectionFields : [name],
-    LineItem        : [{value : name}]
+    LineItem        : [
+        {
+            Value : name,
+            Label : '{i18n>EmployeeName}'
+        },
+        {
+            Value : recordsCount,
+            Label : '{i18n>RecordsCount}'
+        },
+        {
+            Value : billingTime,
+            Label : '{i18n>BillingTime}'
+        },
+        {
+            Value : bonus,
+            Label : '{i18n>Bonus}'
+        }
+    ]
 });

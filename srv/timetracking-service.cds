@@ -31,6 +31,7 @@ service TimetrackingService {
             modifiedAt,
             modifiedBy;
 
+    @odata.draft.enabled
     entity Employees           as
         select from timetracking.Employees {
             key ID,
@@ -38,7 +39,8 @@ service TimetrackingService {
                 count(recordsView.ID)               as recordsCount : Integer,
                 sum(recordsView.billingTime)        as billingTime :  Double,
                 sum(recordsView.billingTime) / 1440 as bonus :        Double,
-                projects
+                projects,
+                records
         }
         group by
             ID,
@@ -67,8 +69,3 @@ service TimetrackingService {
         * , invoice : redirected to Invoices
     };
 }
-
-
-// Enable Fiori Draft for Orders
-annotate TimetrackingService.Records with @odata.draft.enabled;
-// annotate AdminService.Books with @odata.draft.enabled;
