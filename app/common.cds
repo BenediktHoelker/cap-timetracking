@@ -107,28 +107,6 @@ annotate my.Employees with {
     bonus        @title : '{i18n>Bonus}';
 }
 
-annotate my.EmployeesProjects with {
-    project     @(
-        Common         : {
-            Text             : project.title,
-            FieldControl     : #Mandatory,
-            ValueList.entity : 'Projects'
-        },
-        title : '{i18n>Project}'
-    );
-}
-
-annotate my.ProjectMembers with {
-    employee    @(
-        Common         : {
-            Text             : employee.name,
-            FieldControl     : #Mandatory,
-            ValueList.entity : 'Employees'
-        },
-        title : '{i18n>Employee}'
-    );
-}
-
 annotate my.Employees with @(UI : {
     HeaderInfo      : {
         TypeName       : '{i18n>Employee}',

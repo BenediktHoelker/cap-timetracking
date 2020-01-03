@@ -41,7 +41,7 @@
                     "earlyRequests": true,
                     "groupProperties": {
                         "default": {
-                            "submit": "Auto"
+                            "submit": "API"
                         }
                     }
                 }
@@ -63,6 +63,11 @@
                     "pattern": "Employees({key}/projects({key2}):?query:",
                     "name": "ProjectsDetails",
                     "target": "ProjectsDetails"
+                },
+                {
+                    "pattern": "Employees({key}/records({key2}):?query:",
+                    "name": "RecordsDetails",
+                    "target": "RecordsDetails"
                 }
             ],
             "targets": {
@@ -95,6 +100,11 @@
                                     "detail": {
                                         "route": "ProjectsDetails"
                                     }
+                                },
+                                "Records": {
+                                    "detail": {
+                                        "route": "RecordsDetails"
+                                    }
                                 }
                             }
                         }
@@ -107,6 +117,16 @@
                     "options": {
                         "settings": {
                             "entitySet": "EmployeesProjects"
+                        }
+                    }
+                },
+                "RecordsDetails": {
+                    "type": "Component",
+                    "id": "RecordsDetails",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "entitySet": "Records"
                         }
                     }
                 }

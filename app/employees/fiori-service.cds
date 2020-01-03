@@ -43,3 +43,14 @@ annotate my.EmployeesProjects with @(UI : {
     SelectionFields : [project_ID],
     LineItem        : [{Value : project_ID}]
 });
+
+annotate my.EmployeesProjects with {
+    project_ID     @(
+        Common         : {
+            Text             : project.title,
+            FieldControl     : #Mandatory,
+            ValueList.entity : 'Projects'
+        },
+        title : '{i18n>Project}'
+    );
+}

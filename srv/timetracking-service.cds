@@ -1,10 +1,9 @@
 using my.timetracking from '../db/schema';
 
 service TimetrackingService {
-    @odata.draft.enabled
+
     entity Records             as select from timetracking.Records;
 
-    @odata.draft.enabled
     entity Projects            as
         select from timetracking.Projects {
             key ID,
@@ -18,7 +17,7 @@ service TimetrackingService {
                 modifiedBy,
                 customer,
                 records,
-                members: redirected to ProjectMembers
+                members : redirected to ProjectMembers
         }
         group by
             ID,
@@ -36,10 +35,10 @@ service TimetrackingService {
         select from timetracking.Employees {
             key ID,
                 name,
-                count(recordsView.ID)               as recordsCount : Integer,
-                sum(recordsView.billingTime)        as billingTime :  Double,
-                sum(recordsView.billingTime) / 1440 as bonus :        Double,
-                projects: redirected to EmployeesProjects,
+                // count(recordsView.ID)               as recordsCount : Integer,
+                // sum(recordsView.billingTime)        as billingTime :  Double,
+                // sum(recordsView.billingTime) / 1440 as bonus :        Double,
+                projects : redirected to EmployeesProjects,
                 records
         }
         group by

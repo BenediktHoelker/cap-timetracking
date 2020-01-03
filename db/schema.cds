@@ -85,7 +85,7 @@ entity Projects : cuid, managed {
   billingFactor : Decimal(5, 2);
   packages      : Association to many Packages
                     on packages.project = $self;
-  records       : Association to many Records
+  records       : Composition of many Records
                     on records.project = $self;
   members       : Association to many EmployeesToProjects
                     on members.project = $self;
@@ -109,9 +109,9 @@ entity Packages : cuid, managed {
 
 entity Employees : cuid, managed {
   name        : String;
-  projects    : Association to many EmployeesToProjects
+  projects    : Composition of many EmployeesToProjects
                   on projects.employee = $self;
-  records     : Association to many Records
+  records     : Composition of many Records
                   on records.employee = $self;
   recordsView : Association to many RecordsView
                   on recordsView.employee = $self;
