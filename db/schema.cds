@@ -92,13 +92,13 @@ entity Projects : cuid, managed {
   customer      : Association to one Customers;
 }
 
-entity EmployeesToProjects {
-  key project_ID  : UUID;
-  key employee_ID : UUID;
-      project     : Association to one Projects
-                      on project.ID = project_ID;
-      employee    : Association to one Employees
-                      on employee.ID = employee_ID;
+entity EmployeesToProjects : cuid, managed {
+  project_ID  : UUID;
+  employee_ID : UUID;
+  project     : Association to one Projects
+                  on project.ID = project_ID;
+  employee    : Association to one Employees
+                  on employee.ID = employee_ID;
 }
 
 entity Packages : cuid, managed {
