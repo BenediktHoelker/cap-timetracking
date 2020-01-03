@@ -18,7 +18,7 @@ service TimetrackingService {
                 modifiedBy,
                 customer,
                 records,
-                members
+                members: redirected to ProjectMembers
         }
         group by
             ID,
@@ -39,7 +39,7 @@ service TimetrackingService {
                 count(recordsView.ID)               as recordsCount : Integer,
                 sum(recordsView.billingTime)        as billingTime :  Double,
                 sum(recordsView.billingTime) / 1440 as bonus :        Double,
-                projects,
+                projects: redirected to EmployeesProjects,
                 records
         }
         group by
@@ -60,8 +60,11 @@ service TimetrackingService {
 
     entity InvoicesView        as projection on timetracking.InvoicesView;
 
-    @odata.draft.enabled
     entity EmployeesToProjects as projection on timetracking.EmployeesToProjects;
+
+    entity ProjectMembers      as projection on timetracking.EmployeesToProjects;
+
+    entity EmployeesProjects   as projection on timetracking.EmployeesToProjects;
 
     entity RecordStatus        as projection on timetracking.RecordStatus;
 

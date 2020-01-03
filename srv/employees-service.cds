@@ -1,7 +1,7 @@
 using my.timetracking from '../db/schema';
 
 service EmployeesService {
-    entity Employees           as
+    entity Employees         as
         select from timetracking.Employees {
             key ID,
                 name,
@@ -14,11 +14,8 @@ service EmployeesService {
         group by
             ID,
             name;
-}
 
-// Temporary workaround -> https://github.wdf.sap.corp/cap/issues/issues/3121
-extend service EmployeesService with {
-  entity Records as select from timetracking.Records;
-  entity Projects as select from timetracking.Projects;
-  entity EmployeesToProjects as select from timetracking.EmployeesToProjects;
+    entity Records           as select from timetracking.Records;
+    entity Projects          as select from timetracking.Projects;
+    entity EmployeesProjects as select from timetracking.EmployeesToProjects;
 }

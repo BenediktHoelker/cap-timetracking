@@ -2,7 +2,7 @@
   Common Annotations shared by all apps
 */
 
-using {my.timetracking as my} from '../db/schema';
+using {TimetrackingService as my} from '../srv/timetracking-service';
 
 annotate my.Records with @(UI : {
     HeaderInfo      : {
@@ -72,10 +72,13 @@ annotate my.Projects with @(UI : {
         description
     ],
     LineItem        : [
-        {Value : title},
-        {Value : description},
-        {Value : totalTime},
-        {Value : customer.name}
+        {Value    : title},
+        {Value    : description},
+        {
+            Value : customer.name,
+            Label : '{i18n>ProjectCustomer}'
+        },
+        {Value    : totalTime}
     ]
 });
 
@@ -102,6 +105,28 @@ annotate my.Employees with {
     recordsCount @title : '{i18n>RecordsCount}';
     billingTime  @title : '{i18n>BillingTime}';
     bonus        @title : '{i18n>Bonus}';
+}
+
+annotate my.EmployeesProjects with {
+    project     @(
+        Common         : {
+            Text             : project.title,
+            FieldControl     : #Mandatory,
+            ValueList.entity : 'Projects'
+        },
+        title : '{i18n>Project}'
+    );
+}
+
+annotate my.ProjectMembers with {
+    employee    @(
+        Common         : {
+            Text             : employee.name,
+            FieldControl     : #Mandatory,
+            ValueList.entity : 'Employees'
+        },
+        title : '{i18n>Employee}'
+    );
 }
 
 annotate my.Employees with @(UI : {
