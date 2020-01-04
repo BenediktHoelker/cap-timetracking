@@ -41,7 +41,7 @@ annotate my.Records with {
     date        @title : '{i18n>Date}';
     time        @title : '{i18n>Duration}';
     description @title : '{i18n>RecordDescription}'  @UI.MultiLineText;
-    project     @(
+    project  @(
         Common         : {
             Text             : project.title,
             FieldControl     : #Mandatory,
@@ -49,7 +49,7 @@ annotate my.Records with {
         },
         title : '{i18n>Project}'
     );
-    employee    @(
+    employee @(
         Common         : {
             Text             : employee.name,
             FieldControl     : #Mandatory,
@@ -148,12 +148,12 @@ annotate my.Customers with {
 }
 
 annotate my.Customers with @(UI : {
-    HeaderInfo      : {
+    HeaderInfo     : {
         TypeName       : '{i18n>Customer}',
         TypeNamePlural : '{i18n>Customers}',
         Title          : {Value : name}
     },
-    Identification  : [{Value : name}],
+    Identification : [{Value : name}],
     // SelectionFields : [name],
-    LineItem        : [{Value : name}]
+    LineItem       : [{Value : name}]
 });
