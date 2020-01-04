@@ -3,6 +3,6 @@
 */
 
 using from './admin/fiori-service';
-using from './projects/fiori-service';
+using from './projects/projects-service';
 using from './employees/fiori-service';
 using from './common';

@@ -1,7 +1,7 @@
-using {TimetrackingService as my} from '../../srv/timetracking-service';
+using {ProjectsService as my} from '../../srv/projects-service';
 
 annotate my.ProjectMembers with {
-    employee_ID @(
+    employee @(
         Common : {
             Text         : employee.name,
             FieldControl : #Mandatory
@@ -46,21 +46,22 @@ annotate my.Projects with @(UI : {
             Label  : '{i18n>Admin}',
             Target : '@UI.FieldGroup#Admin'
         },
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Label  : '{i18n>Records}',
-            Target : 'records/@UI.LineItem'
-        },
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Label  : '{i18n>Members}',
-            Target : 'members/@UI.LineItem'
-        },
+        // {
+        //     $Type  : 'UI.ReferenceFacet',
+        //     Label  : '{i18n>Records}',
+        //     Target : 'records/@UI.LineItem'
+        // },
+        // {
+        //     $Type  : 'UI.ReferenceFacet',
+        //     Label  : '{i18n>Members}',
+        //     Target : 'members/@UI.LineItem'
+        // },
     ],
     FieldGroup #General : {Data : [
         {Value : title},
         {Value : description},
-        {Value : totalTime},
+        {Value : customer_ID},
+        // {Value : totalTime},
         {Value : billingFactor}
     ]},
     FieldGroup #Admin   : {Data : [
@@ -69,4 +70,27 @@ annotate my.Projects with @(UI : {
         {Value : modifiedBy},
         {Value : modifiedAt}
     ]}
+});
+
+annotate my.Projects with @(UI : {
+    HeaderInfo      : {
+        TypeName       : '{i18n>Project}',
+        TypeNamePlural : '{i18n>Projects}',
+        Title          : {Value : title},
+        Description    : {Value : description}
+    },
+    Identification  : [{Value : title}],
+    SelectionFields : [
+        title,
+        description
+    ],
+    LineItem        : [
+        {Value    : title},
+        {Value    : description},
+        {
+            Value : customer.name,
+            Label : '{i18n>ProjectCustomer}'
+        }
+        // {Value    : totalTime}
+    ]
 });

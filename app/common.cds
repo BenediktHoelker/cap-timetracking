@@ -2,7 +2,7 @@
   Common Annotations shared by all apps
 */
 
-using {TimetrackingService as my} from '../srv/timetracking-service';
+using {my.timetracking as my} from '../srv/timetracking-service';
 
 annotate my.Records with @(UI : {
     HeaderInfo      : {
@@ -91,8 +91,15 @@ annotate my.Projects with {
         title : '{i18n>ProjectID}',
         UI    : Hidden
     );
+    customer      @(
+        Common           : {
+            Text         : customer.name,
+            FieldControl : #Mandatory
+        },
+        ValueList.entity : 'Customers',
+        title            : '{i18n>ProjectCustomer}'
+    );
     title         @title : '{i18n>ProjectTitle}';
-    customer      @title : '{i18n>ProjectCustomer}';
     totalTime     @title : '{i18n>ProjectTotalTime}';
     billingFactor @title : '{i18n>ProjectBillingFactor}';
     members       @title : '{i18n>ProjectMembers}';
@@ -133,4 +140,20 @@ annotate my.Employees with @(UI : {
             Label : '{i18n>Bonus}'
         }
     ]
+});
+
+annotate my.Customers with {
+    ID   @title : '{i18n>CustomerID}'  @UI.HiddenFilter;
+    name @title : '{i18n>CustomerName}';
+}
+
+annotate my.Customers with @(UI : {
+    HeaderInfo      : {
+        TypeName       : '{i18n>Customer}',
+        TypeNamePlural : '{i18n>Customers}',
+        Title          : {Value : name}
+    },
+    Identification  : [{Value : name}],
+    // SelectionFields : [name],
+    LineItem        : [{Value : name}]
 });
