@@ -45,13 +45,12 @@ annotate my.Projects with @(UI : {
             $Type  : 'UI.ReferenceFacet',
             Label  : '{i18n>Admin}',
             Target : '@UI.FieldGroup#Admin'
-        },
+        }
     ],
     FieldGroup #General : {Data : [
         {Value : title},
         {Value : description},
         {Value : customer_ID},
-        // {Value : totalTime},
         {Value : billingFactor}
     ]},
     FieldGroup #Admin   : {Data : [
@@ -81,6 +80,13 @@ annotate my.Projects with @(UI : {
             Value : customer.name,
             Label : '{i18n>ProjectCustomer}'
         },
-        {Value    : totalTime}
+        {
+            Value : totalTime,
+            Label : '{i18n>ProjectTotalTime}'
+        },
+        {
+            Value : recordsCount,
+            Label : '{i18n>ProjectRecordsCount}'
+        }
     ]
 });

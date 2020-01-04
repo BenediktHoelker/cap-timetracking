@@ -33,7 +33,6 @@ service TimetrackingService {
     entity Employees           as
         select from timetracking.Employees {
             * ,
-            @Core.Computed
             count(records.ID)                    as recordsCount : Integer,
             round(sum(records.time), 2)          as billingTime :  Double,
             round(sum((records.time) / 1440), 2) as bonus :        Double,

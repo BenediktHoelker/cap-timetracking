@@ -6,7 +6,22 @@ service ProjectsService {
     entity Records        as select from my.Records;
 
     @odata.draft.enabled
-    entity Projects       as select from my.Projects;
+    entity Projects       as
+        select from my.Projects {
+            * ,
+            count(records.ID)           as recordsCount : Integer,
+            round(sum(records.time), 2) as totalTime :    Double,
+            records,
+            members
+        }
+        group by
+            ID,
+            title,
+            description,
+            createdAt,
+            createdBy,
+            billingFactor,
+            customer;
 
     entity ProjectMembers as select from my.EmployeesToProjects;
 }
