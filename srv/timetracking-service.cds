@@ -1,10 +1,11 @@
-using my.timetracking from '../db/schema';
+using {my.timetracking as my} from '../db/schema';
 
 service TimetrackingService {
-    entity Records             as select from timetracking.Records;
+    @odata.draft.enabled
+    entity Records             as select from my.Records;
 
     entity Projects            as
-        select from timetracking.Projects {
+        select from my.Projects {
             key ID,
                 title,
                 description,
@@ -21,7 +22,6 @@ service TimetrackingService {
         group by
             ID,
             title,
-            customer,
             description,
             billingFactor,
             createdAt,
@@ -29,9 +29,8 @@ service TimetrackingService {
             modifiedAt,
             modifiedBy;
 
-    @odata.draft.enabled
     entity Employees           as
-        select from timetracking.Employees {
+        select from my.Employees {
             * ,
             count(records.ID)                    as recordsCount : Integer,
             round(sum(records.time), 2)          as billingTime :  Double,
@@ -43,21 +42,21 @@ service TimetrackingService {
                        ID,
                        name;
 
-    entity Packages            as projection on timetracking.Packages;
+    entity Packages            as projection on my.Packages;
 
-    entity Customers           as projection on timetracking.CustomersView {
+    entity Customers           as projection on my.CustomersView {
         * , invoices : redirected to Invoices
     };
 
-    entity Invoices            as projection on timetracking.Invoices;
+    entity Invoices            as projection on my.Invoices;
 
-    entity InvoiceItems        as projection on timetracking.InvoiceItems {
+    entity InvoiceItems        as projection on my.InvoiceItems {
         * , invoice : redirected to Invoices
     };
 
-    entity InvoicesView        as projection on timetracking.InvoicesView;
-    entity EmployeesToProjects as projection on timetracking.EmployeesToProjects;
-    entity ProjectMembers      as projection on timetracking.EmployeesToProjects;
-    entity EmployeesProjects   as projection on timetracking.EmployeesToProjects;
-    entity RecordStatus        as projection on timetracking.RecordStatus;
+    entity InvoicesView        as projection on my.InvoicesView;
+    entity EmployeesToProjects as projection on my.EmployeesToProjects;
+    entity ProjectMembers      as projection on my.EmployeesToProjects;
+    entity EmployeesProjects   as projection on my.EmployeesToProjects;
+    entity RecordStatus        as projection on my.RecordStatus;
 }

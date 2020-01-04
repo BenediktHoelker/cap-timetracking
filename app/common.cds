@@ -145,8 +145,9 @@ annotate my.Employees with @(UI : {
 });
 
 annotate my.Customers with {
-    ID   @title : '{i18n>CustomerID}'  @UI.HiddenFilter;
-    name @title : '{i18n>CustomerName}';
+    ID            @title : '{i18n>CustomerID}'  @UI.HiddenFilter;
+    name          @title : '{i18n>CustomerName}';
+    projectsCount @title : '{i18n>ProjectsCount}';
 }
 
 annotate my.Customers with @(UI : {

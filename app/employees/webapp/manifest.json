@@ -8,7 +8,7 @@
         "i18n": "i18n/i18n.properties",
         "dataSources": {
             "EmployeesService": {
-                "uri": "/timetracking/",
+                "uri": "/employees/",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "4.0"

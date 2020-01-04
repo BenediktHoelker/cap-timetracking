@@ -1,4 +1,4 @@
-using TimetrackingService from '../../srv/timetracking-service';
+using  from '../../srv/timetracking-service';
 
 annotate TimetrackingService.Records with @(UI : {
     Facets              : [

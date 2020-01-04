@@ -61,8 +61,8 @@
                 },
                 {
                     "pattern": "Customers({key}/projects({key2}):?query:",
-                    "name": "RecordDetails",
-                    "target": "RecordDetails"
+                    "name": "ProjectDetails",
+                    "target": "ProjectDetails"
                 }
             ],
             "targets": {
@@ -99,7 +99,7 @@
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
-                            "entitySet": "Customers",
+                            "entitySet": "Projects",
                             "navigation": {
                                 "Projects": {
                                     "detail": {

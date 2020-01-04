@@ -1,4 +1,4 @@
-using {TimetrackingService as my} from '../../srv/timetracking-service';
+using {EmployeesService as my} from '../../srv/employees-service';
 
 annotate my.Employees with @(UI : {
     Facets              : [
@@ -22,11 +22,18 @@ annotate my.Employees with @(UI : {
 });
 
 annotate my.EmployeesProjects with @(UI : {
-    Facets              : [{
-        $Type  : 'UI.ReferenceFacet',
-        Label  : '{i18n>General}',
-        Target : '@UI.FieldGroup#General'
-    }],
+    Facets              : [
+        {
+            $Type  : 'UI.ReferenceFacet',
+            Label  : '{i18n>General}',
+            Target : '@UI.FieldGroup#General'
+        },
+        {
+            $Type  : 'UI.ReferenceFacet',
+            Label  : '{i18n>Records}',
+            Target : 'records/@UI.LineItem'
+        }
+    ],
     FieldGroup #General : {Data : [{Value : project_ID}]}
 });
 
@@ -45,8 +52,8 @@ annotate my.EmployeesProjects with @(UI : {
 });
 
 annotate my.EmployeesProjects with {
-    project_ID     @(
-        Common         : {
+    project_ID @(
+        Common : {
             Text             : project.title,
             FieldControl     : #Mandatory,
             ValueList.entity : 'Projects'
