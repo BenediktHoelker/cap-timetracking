@@ -9,6 +9,7 @@ entity Records : cuid, managed {
   title       : String;
   description : String;
   time        : Decimal(4, 2);
+  timeUnit    : String;
   date        : Date;
   status      : String;
   employee    : Association to one Employees;
@@ -19,26 +20,6 @@ entity RecordStatus : cuid {
   text     : String;
   editable : Boolean;
 }
-
-view RecordsView as
-  select from Records
-  left outer join InvoiceItems
-    on         Records.ID      =      InvoiceItems.record_ID
-  {
-    key Records.ID,
-        date,
-        description,
-        employee,
-        invoice,
-        project,
-        time,
-        title,
-        case
-          when InvoiceItems.ID is not null then 'BILLED'
-          else                                  'INITIAL'
-        end                          as status :      String,
-        time * project.billingFactor as billingTime : Double
-  };
 
 entity Customers : cuid, managed {
   name     : String;
@@ -113,6 +94,4 @@ entity Employees : cuid, managed {
                   on projects.employee = $self;
   records     : Composition of many Records
                   on records.employee = $self;
-  recordsView : Association to many RecordsView
-                  on recordsView.employee = $self;
 }

@@ -31,7 +31,8 @@ annotate my.Records with @(UI : {
         },
         {Value    : description},
         {Value    : date},
-        {Value    : time}
+        {Value    : time},
+        {Value    : timeUnit}
     ]
 });
 
@@ -40,8 +41,9 @@ annotate my.Records with {
     title       @title : '{i18n>RecordTitle}';
     date        @title : '{i18n>Date}';
     time        @title : '{i18n>Duration}';
+    timeUnit    @title : '{i18n>DurationUnit}';
     description @title : '{i18n>RecordDescription}'  @UI.MultiLineText;
-    project  @(
+    project     @(
         Common         : {
             Text             : project.title,
             FieldControl     : #Mandatory,
@@ -49,7 +51,7 @@ annotate my.Records with {
         },
         title : '{i18n>Project}'
     );
-    employee @(
+    employee    @(
         Common         : {
             Text             : employee.name,
             FieldControl     : #Mandatory,

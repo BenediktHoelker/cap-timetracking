@@ -1,7 +1,6 @@
 using my.timetracking from '../db/schema';
 
 service TimetrackingService {
-
     entity Records             as select from timetracking.Records;
 
     entity Projects            as
@@ -33,17 +32,17 @@ service TimetrackingService {
     @odata.draft.enabled
     entity Employees           as
         select from timetracking.Employees {
-            key ID,
-                name,
-                // count(recordsView.ID)               as recordsCount : Integer,
-                // sum(recordsView.billingTime)        as billingTime :  Double,
-                // sum(recordsView.billingTime) / 1440 as bonus :        Double,
-                projects : redirected to EmployeesProjects,
-                records
+            * ,
+            @Core.Computed
+            count(records.ID)                    as recordsCount : Integer,
+            round(sum(records.time), 2)          as billingTime :  Double,
+            round(sum((records.time) / 1440), 2) as bonus :        Double,
+            projects : redirected to EmployeesProjects,
+            records
         }
         group by
-            ID,
-            name;
+                       ID,
+                       name;
 
     entity Packages            as projection on timetracking.Packages;
 
@@ -58,16 +57,8 @@ service TimetrackingService {
     };
 
     entity InvoicesView        as projection on timetracking.InvoicesView;
-
     entity EmployeesToProjects as projection on timetracking.EmployeesToProjects;
-
     entity ProjectMembers      as projection on timetracking.EmployeesToProjects;
-
     entity EmployeesProjects   as projection on timetracking.EmployeesToProjects;
-
     entity RecordStatus        as projection on timetracking.RecordStatus;
-
-    entity RecordsView         as projection on timetracking.RecordsView {
-        * , invoice : redirected to Invoices
-    };
 }

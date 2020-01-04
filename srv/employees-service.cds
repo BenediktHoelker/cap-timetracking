@@ -5,9 +5,9 @@ service EmployeesService {
         select from timetracking.Employees {
             key ID,
                 name,
-                count(recordsView.ID)               as recordsCount : Integer,
-                sum(recordsView.billingTime)        as billingTime :  Double,
-                sum(recordsView.billingTime) / 1440 as bonus :        Double,
+                count(records.ID)        as recordsCount : Integer,
+                sum(records.time)        as billingTime :  Double,
+                sum(records.time) / 1440 as bonus :        Double,
                 projects,
                 records
         }

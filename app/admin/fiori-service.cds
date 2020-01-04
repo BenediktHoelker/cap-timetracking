@@ -20,6 +20,7 @@ annotate TimetrackingService.Records with @(UI : {
         {Value : employee_ID},
         {Value : date},
         {Value : time},
+        {Value : timeUnit},
     ]},
     FieldGroup #Admin   : {Data : [
         {Value : createdBy},
