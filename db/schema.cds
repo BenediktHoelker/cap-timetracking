@@ -11,14 +11,12 @@ entity Records : cuid, managed {
   time        : Decimal(4, 2);
   timeUnit    : String;
   date        : Date;
-  status      : String;
+  status      : String enum {
+    INITIAL;
+    BILLED;
+  };
   employee    : Association to one Employees;
   project     : Association to one Projects;
-}
-
-entity RecordStatus : cuid {
-  text     : String;
-  editable : Boolean;
 }
 
 entity Customers : cuid, managed {
@@ -89,9 +87,43 @@ entity Packages : cuid, managed {
 }
 
 entity Employees : cuid, managed {
-  name        : String;
-  projects    : Composition of many EmployeesToProjects
-                  on projects.employee = $self;
-  records     : Association to many Records
-                  on records.employee = $self;
+  name         : String;
+  travels      : Composition of many Travels
+                   on travels.employee = $self;
+  leaves       : Composition of many Leaves
+                   on leaves.employee = $self;
+  projects     : Composition of many EmployeesToProjects
+                   on projects.employee = $self;
+  records      : Association to many Records
+                   on records.employee = $self;
+  recordsCount : Integer;
+  daysOfTravel : Integer @title: '{i18n>Employees.DaysOfTravel}';
+  daysOfLeave  : Integer @title: '{i18n>Employees.DaysOfLeave}';
+  billingTime  : Integer;
+  bonus        : Integer;
+}
+
+entity Travels : cuid, managed {
+  project       : Association to Projects;
+  employee      : Association to Employees;
+  daysOfTravel  : Integer      @readonly;
+  dateFrom      : Date         @title : '{i18n>Travels.DateFrom}';
+  dateTo        : Date         @title : '{i18n>Travels.DateTo}';
+  journey       : Decimal(4, 2)@title : '{i18n>Travels.Journey}';
+  returnJourney : Decimal(4, 2)@title : '{i18n>Travels.ReturnJourney}';
+  durationUnit  : String enum {
+    h;
+    m;
+  };
+}
+
+entity Leaves : cuid, managed {
+  reason      : String enum {
+    ILLNESS;
+    VACATION;
+  };
+  dateFrom    : Date    @title : '{i18n>Leaves.DateFrom}';
+  dateTo      : Date    @title : '{i18n>Leaves.DateTo}';
+  daysOfLeave : Integer @readonly;
+  employee    : Association to Employees;
 }

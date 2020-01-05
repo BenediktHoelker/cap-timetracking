@@ -10,7 +10,8 @@ service TimetrackingService {
                 title,
                 description,
                 billingFactor,
-                sum(records.time) as totalTime : Decimal(13, 2),
+                count(records.ID) as recordsCount : Integer,
+                sum(records.time) as totalTime :    Decimal(13, 2),
                 createdAt,
                 createdBy,
                 modifiedAt,
@@ -58,5 +59,4 @@ service TimetrackingService {
     entity EmployeesToProjects as projection on my.EmployeesToProjects;
     entity ProjectMembers      as projection on my.EmployeesToProjects;
     entity EmployeesProjects   as projection on my.EmployeesToProjects;
-    entity RecordStatus        as projection on my.RecordStatus;
 }

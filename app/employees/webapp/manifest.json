@@ -68,6 +68,16 @@
                     "pattern": "Employees({key}/records({key2}):?query:",
                     "name": "RecordsDetails",
                     "target": "RecordsDetails"
+                },
+                {
+                    "pattern": "Employees({key}/travels({key2}):?query:",
+                    "name": "TravelDetails",
+                    "target": "TravelDetails"
+                },
+                {
+                    "pattern": "Employees({key}/leaves({key2}):?query:",
+                    "name": "LeaveDetails",
+                    "target": "LeaveDetails"
                 }
             ],
             "targets": {
@@ -127,6 +137,26 @@
                     "options": {
                         "settings": {
                             "entitySet": "Records"
+                        }
+                    }
+                },
+                "TravelDetails": {
+                    "type": "Component",
+                    "id": "TravelDetails",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "entitySet": "Travels"
+                        }
+                    }
+                },
+                "LeaveDetails": {
+                    "type": "Component",
+                    "id": "LeaveDetails",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "entitySet": "Leaves"
                         }
                     }
                 }

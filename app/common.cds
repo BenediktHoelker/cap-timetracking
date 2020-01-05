@@ -122,7 +122,10 @@ annotate my.Employees with @(UI : {
         TypeNamePlural : '{i18n>Employees}',
         Title          : {Value : name}
     },
-    Identification  : [{Value : name}],
+    Identification  : [
+        {Value : name},
+        {Value : recordsCount}
+    ],
     SelectionFields : [name],
     LineItem        : [
         {
@@ -136,6 +139,10 @@ annotate my.Employees with @(UI : {
         {
             Value : billingTime,
             Label : '{i18n>BillingTime}'
+        },
+        {
+            Value : daysOfLeave,
+            Label : '{i18n>DaysOfLeave}'
         },
         {
             Value : bonus,
@@ -157,6 +164,61 @@ annotate my.Customers with @(UI : {
         Title          : {Value : name}
     },
     Identification : [{Value : name}],
-    // SelectionFields : [name],
     LineItem       : [{Value : name}]
+});
+
+annotate my.Travels with {
+    ID @UI.HiddenFilter;
+}
+
+annotate my.Travels with @(UI : {
+    HeaderInfo     : {
+        TypeName       : '{i18n>Travel}',
+        TypeNamePlural : '{i18n>Travels}',
+        Title          : {Value : dateFrom},
+        Description    : {Value : dateTo}
+    },
+    Facets         : [{
+        $Type  : 'UI.ReferenceFacet',
+        Target : '@UI.Identification'
+    }],
+    Identification : [
+        {Value : dateFrom},
+        {Value : dateTo},
+        {Value : journey},
+        {Value : returnJourney},
+        {Value : durationUnit}
+    ],
+    LineItem       : [
+        {Value : dateFrom},
+        {Value : dateTo},
+        {Value : journey},
+        {Value : returnJourney},
+        {Value : durationUnit}
+    ]
+});
+
+annotate my.Leaves with {
+    ID @UI.HiddenFilter;
+}
+
+annotate my.Leaves with @(UI : {
+    HeaderInfo     : {
+        TypeName       : '{i18n>Leave}',
+        TypeNamePlural : '{i18n>Leaves}',
+        Title          : {Value : dateFrom},
+        Description    : {Value : dateTo}
+    },
+    Facets         : [{
+        $Type  : 'UI.ReferenceFacet',
+        Target : '@UI.Identification'
+    }],
+    Identification : [
+        {Value : dateFrom},
+        {Value : dateTo}
+    ],
+    LineItem       : [
+        {Value : dateFrom},
+        {Value : dateTo}
+    ]
 });

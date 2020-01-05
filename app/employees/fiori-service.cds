@@ -16,6 +16,16 @@ annotate my.Employees with @(UI : {
             $Type  : 'UI.ReferenceFacet',
             Label  : '{i18n>Projects}',
             Target : 'projects/@UI.LineItem'
+        },
+        {
+            $Type  : 'UI.ReferenceFacet',
+            Label  : '{i18n>Travels}',
+            Target : 'travels/@UI.LineItem'
+        },
+        {
+            $Type  : 'UI.ReferenceFacet',
+            Label  : '{i18n>Leaves}',
+            Target : 'leaves/@UI.LineItem'
         }
     ],
     FieldGroup #General : {Data : [{Value : name}]}
