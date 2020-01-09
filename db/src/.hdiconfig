@@ -159,6 +159,5 @@
   "txt": {
    "plugin_name": "com.sap.hana.di.copyonly"
   }
- },
- "plugin_version": "2.0.40.0"
+ }
 }

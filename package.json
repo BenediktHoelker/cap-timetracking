@@ -7,7 +7,8 @@
   "dependencies": {
     "@sap/cds": "^3.20.1",
     "express": "^4.17.1",
-    "hdb": "^0.17.1"
+    "hdb": "^0.17.1",
+    "mbt": "^1.0.7"
   },
   "engines": {
     "node": "^8.9"
@@ -17,7 +18,7 @@
     "deploy": "cds deploy",
     "start": "cds run",
     "build:mta": "cds build/all && mbt build -p=cf",
-    "deploy:cf": "npm run build:mta && cf deploy mta_archives/${npm_package_name}_${npm_package_version}.mtar"
+    "deploy:cf": "npm run build:mta && cf deploy mta_archives/timetracking_1.0.3.mtar"
   },
   "devDependencies": {
     "sqlite3": "^4.1.1"
@@ -30,6 +31,9 @@
           "db",
           "srv"
         ],
+        "credentials": {
+          "database": "timetracking.db"
+        },
         "[production]": {
           "kind": "hana"
         }
