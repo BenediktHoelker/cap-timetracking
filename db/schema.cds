@@ -33,8 +33,12 @@ view CustomersView as
     count(projects.ID) as projectsCount : Integer
   }
   group by
-    ID,
-    name;
+    Customers.ID,
+    Customers.createdAt,
+    Customers.createdBy,
+    Customers.modifiedAt,
+    Customers.modifiedBy,
+    Customers.name;
 
 entity Invoices : cuid, managed {
   customer : Association to one Customers;
@@ -55,8 +59,12 @@ entity InvoicesView as
     sum(items.record.time) as amount : Double
   }
   group by
-    ID,
-    customer;
+    Invoices.ID,
+    Invoices.customer,
+    Invoices.createdAt,
+    Invoices.createdBy,
+    Invoices.modifiedAt,
+    Invoices.modifiedBy;
 
 entity Projects : cuid, managed {
   title         : String;
@@ -97,8 +105,8 @@ entity Employees : cuid, managed {
   records      : Association to many Records
                    on records.employee = $self;
   recordsCount : Integer;
-  daysOfTravel : Integer @title: '{i18n>Employees.DaysOfTravel}';
-  daysOfLeave  : Integer @title: '{i18n>Employees.DaysOfLeave}';
+  daysOfTravel : Integer @title : '{i18n>Employees.DaysOfTravel}';
+  daysOfLeave  : Integer @title : '{i18n>Employees.DaysOfLeave}';
   billingTime  : Integer;
   bonus        : Integer;
 }

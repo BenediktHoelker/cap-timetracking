@@ -6,16 +6,21 @@ service EmployeesService {
         select from my.Employees {
             * ,
             count(records.ID)                    as recordsCount : Integer,
-            sum(travels.daysOfTravel)            as daysOfTravel : Integer,
-            sum(leaves.daysOfLeave)              as daysOfLeave :  Integer,
+            0                                    as daysOfTravel : Integer,
+            0                                    as daysOfLeave :  Integer,
             round(sum(records.time), 2)          as billingTime :  Double,
             round(sum((records.time) / 1440), 2) as bonus :        Double,
             projects : redirected to EmployeesProjects,
             records
         }
         group by
-                       ID,
-                       name;
+                       Employees.ID,
+                       Employees.billingTime,
+                       Employees.createdAt,
+                       Employees.createdBy,
+                       Employees.modifiedAt,
+                       Employees.modifiedBy,
+                       Employees.name;
 
     entity Records           as select from my.Records;
 
@@ -28,12 +33,15 @@ service EmployeesService {
             members
         }
         group by
-            ID,
-            title,
-            description,
-            createdAt,
-            createdBy,
-            billingFactor;
+            Projects.ID,
+            Projects.title,
+            Projects.description,
+            Projects.createdAt,
+            Projects.createdBy,
+            Projects.modifiedAt,
+            Projects.modifiedBy,
+            Projects.billingFactor,
+            Projects.customer;
 
     entity Travels           as select from my.Travels;
     entity Leaves            as select from my.Leaves;

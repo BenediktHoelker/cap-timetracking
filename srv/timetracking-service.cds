@@ -21,14 +21,15 @@ service TimetrackingService {
                 members : redirected to ProjectMembers
         }
         group by
-            ID,
-            title,
-            description,
-            billingFactor,
-            createdAt,
-            createdBy,
-            modifiedAt,
-            modifiedBy;
+            Projects.ID,
+            Projects.title,
+            Projects.description,
+            Projects.createdAt,
+            Projects.createdBy,
+            Projects.modifiedAt,
+            Projects.modifiedBy,
+            Projects.billingFactor,
+            Projects.customer;
 
     entity Employees           as
         select from my.Employees {
@@ -40,8 +41,15 @@ service TimetrackingService {
             records
         }
         group by
-                       ID,
-                       name;
+                       Employees.ID,
+                       Employees.daysOfLeave,
+                       Employees.daysOfTravel,
+                       Employees.billingTime,
+                       Employees.createdAt,
+                       Employees.createdBy,
+                       Employees.modifiedAt,
+                       Employees.modifiedBy,
+                       Employees.name;
 
     entity Packages            as projection on my.Packages;
 

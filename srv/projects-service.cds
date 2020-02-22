@@ -15,13 +15,15 @@ service ProjectsService {
             members
         }
         group by
-            ID,
-            title,
-            description,
-            createdAt,
-            createdBy,
-            billingFactor,
-            customer;
+            Projects.ID,
+            Projects.title,
+            Projects.description,
+            Projects.createdAt,
+            Projects.createdBy,
+            Projects.modifiedAt,
+            Projects.modifiedBy,
+            Projects.billingFactor,
+            Projects.customer;
 
     entity ProjectMembers as select from my.EmployeesToProjects;
 }

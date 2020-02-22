@@ -1,6 +1,6 @@
 _schema-version: 2.0.0
 ID: timetracking
-version: 1.0.3
+version: 1.0.4
 modules:
   - name: timetracking-db
     type: hdb
@@ -22,6 +22,7 @@ modules:
           url: ${default-url}
     requires:
       - name: timetracking-db-hdi-container
+
   - name: timetracking-ui
     type: nodejs
     path: app

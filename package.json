@@ -18,7 +18,7 @@
     "deploy": "cds deploy",
     "start": "cds run",
     "build:mta": "cds build/all && mbt build -p=cf",
-    "deploy:cf": "npm run build:mta && cf deploy mta_archives/timetracking_1.0.3.mtar"
+    "deploy:cf": "npm run build:mta && cf deploy mta_archives/timetracking_1.0.4.mtar"
   },
   "devDependencies": {
     "sqlite3": "^4.1.1"

@@ -8,8 +8,12 @@ service CustomersService {
             count(projects.ID) as projectsCount : Integer
         }
         group by
-            ID,
-            name;
+            Customers.ID,
+            Customers.createdAt,
+            Customers.createdBy,
+            Customers.modifiedAt,
+            Customers.modifiedBy,
+            Customers.name;
 
     entity Projects  as
         select from my.Projects {
@@ -20,13 +24,15 @@ service CustomersService {
             members
         }
         group by
-            ID,
-            title,
-            description,
-            createdAt,
-            createdBy,
-            billingFactor,
-            customer;
+            Projects.ID,
+            Projects.title,
+            Projects.description,
+            Projects.createdAt,
+            Projects.createdBy,
+            Projects.modifiedAt,
+            Projects.modifiedBy,
+            Projects.billingFactor,
+            Projects.customer;
 
     entity Records   as select from my.Records;
 }
