@@ -1,6 +1,6 @@
 using {my.timetracking as my} from '../db/schema';
 
-service TimetrackingService {
+service TimetrackingService @(requires:'authenticated-user') {
     @odata.draft.enabled
     entity Records             as select from my.Records;
 
