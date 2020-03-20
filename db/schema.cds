@@ -16,7 +16,7 @@ entity Records : cuid, managed {
     BILLED;
   };
   employee    : Association to one Employees;
-  project     : Association to one Projects;
+  project     : Association to one EmployeesToProjects;
 }
 
 entity Customers : cuid, managed {
@@ -79,8 +79,6 @@ entity Projects : cuid, managed {
   totalTime     : Integer;
   packages      : Association to many Packages
                     on packages.project = $self;
-  records       : Association to many Records
-                    on records.project = $self;
   members       : Association to many EmployeesToProjects
                     on members.project = $self;
   customer      : Association to one Customers;
@@ -89,6 +87,8 @@ entity Projects : cuid, managed {
 entity EmployeesToProjects : cuid, managed {
   project_ID  : UUID;
   employee_ID : UUID;
+  records       : Association to many Records
+                    on records.project = $self;
   project     : Association to one Projects
                   on project.ID = project_ID;
   employee    : Association to one Employees
