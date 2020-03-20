@@ -32,7 +32,8 @@
                     "roles": [
                         "admin"
                     ]
-                }
+                },
+                "christian": {}
             }
         }
     }

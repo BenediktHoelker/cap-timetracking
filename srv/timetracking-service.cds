@@ -2,15 +2,24 @@ using {my.timetracking as my} from '../db/schema';
 
 // service TimetrackingService @(requires:'authenticated-user') {
 service TimetrackingService {
-    @odata.draft.enabled
-    entity Records           as
+    entity Records             as
         select from my.Records {
-            *,
-            employee : redirected to Employees,
-            project  : redirected to EmployeesProjects
+            key ID,
+                createdAt,
+                createdBy,
+                date,
+                description,
+                modifiedAt,
+                modifiedBy,
+                status,
+                time,
+                timeUnit,
+                title,
+                employee : redirected to Employees,
+                project  : redirected to EmployeesProjects
         };
 
-    entity Projects          as
+    entity Projects            as
         select from my.Projects {
             key ID,
                 title,
@@ -40,7 +49,7 @@ service TimetrackingService {
             Projects.billingFactor,
             Projects.customer;
 
-    entity Employees         as
+    entity Employees           as
         select from my.Employees {
             *,
             count(
@@ -72,9 +81,9 @@ service TimetrackingService {
             Employees.modifiedBy,
             Employees.name;
 
-    entity Packages          as projection on my.Packages;
+    entity Packages            as projection on my.Packages;
 
-    entity Customers         as
+    entity Customers           as
         select from my.Customers {
             *,
             count(
@@ -91,21 +100,22 @@ service TimetrackingService {
             Customers.name;
 
 
-    entity Invoices          as projection on my.Invoices;
+    entity Invoices            as projection on my.Invoices;
 
-    entity InvoiceItems      as projection on my.InvoiceItems {
+    entity InvoiceItems        as projection on my.InvoiceItems {
         * , invoice : redirected to Invoices
     };
 
-    entity Leaves            as projection on my.Leaves;
-    entity Travels           as projection on my.Travels;
-    entity InvoicesView      as projection on my.InvoicesView;
-    entity ProjectMembers    as projection on my.EmployeesToProjects;
-    entity EmployeesToProjects    as projection on my.EmployeesToProjects;
+    entity Leaves              as projection on my.Leaves;
+    entity Travels             as projection on my.Travels;
+    entity InvoicesView        as projection on my.InvoicesView;
+    entity ProjectMembers      as projection on my.EmployeesToProjects;
+    entity EmployeesToProjects as projection on my.EmployeesToProjects;
 
-    entity EmployeesProjects as
+    entity EmployeesProjects   as
         select from my.EmployeesToProjects {
             *,
-            project.title as title
+            project.title     as title,
+            employee.username as username
         };
 }

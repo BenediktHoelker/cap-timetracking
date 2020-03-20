@@ -34,6 +34,7 @@ entity Projects : cuid, managed {
 
 entity Employees : cuid, managed {
   name         : String;
+  username     : String;
   travels      : Composition of many Travels
                    on travels.employee = $self;
   leaves       : Composition of many Leaves
@@ -53,6 +54,7 @@ entity EmployeesToProjects : cuid, managed {
   project_ID  : UUID;
   employee_ID : UUID;
   title       : String;
+  username    : String;
   records     : Association to many Records
                   on records.project = $self;
   project     : Association to one Projects
