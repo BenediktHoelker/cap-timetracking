@@ -20,17 +20,20 @@ entity Records : cuid, managed {
 }
 
 entity Customers : cuid, managed {
-  name     : String;
-  projects : Association to many Projects
-               on projects.customer = $self;
-  invoices : Association to many Invoices
-               on invoices.customer = $self;
+  name          : String;
+  projectsCount : Integer;
+  projects      : Association to many Projects
+                    on projects.customer = $self;
+  invoices      : Association to many Invoices
+                    on invoices.customer = $self;
 }
 
 view CustomersView as
   select from timetracking.Customers {
-    * ,
-    count(projects.ID) as projectsCount : Integer
+    *,
+    count(
+      projects.ID
+    ) as projectsCount : Integer
   }
   group by
     Customers.ID,
@@ -55,8 +58,10 @@ entity InvoiceItems : cuid, managed {
 
 entity InvoicesView as
   select from timetracking.Invoices {
-    * ,
-    sum(items.record.time) as amount : Double
+    *,
+    sum(
+      items.record.time
+    ) as amount : Double
   }
   group by
     Invoices.ID,
@@ -70,6 +75,8 @@ entity Projects : cuid, managed {
   title         : String;
   description   : String;
   billingFactor : Decimal(5, 2);
+  recordsCount  : Integer;
+  totalTime     : Integer;
   packages      : Association to many Packages
                     on packages.project = $self;
   records       : Association to many Records

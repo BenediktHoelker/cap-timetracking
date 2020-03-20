@@ -5,10 +5,10 @@
   "repository": "<Add your repository here>",
   "license": "ISC",
   "dependencies": {
-    "@sap/cds": "^3.20.1",
+    "@sap/cds": "^3.31.2",
     "express": "^4.17.1",
     "hdb": "^0.17.1",
-    "mbt": "^1.0.7",
+    "mbt": "^1.0.11",
     "passport": "^0.4.1"
   },
   "engines": {

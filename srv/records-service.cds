@@ -1,7 +1,6 @@
 using {my.timetracking as my} from '../db/schema';
 
-// service TimetrackingService @(requires:'authenticated-user') {
-service TimetrackingService {
+service RecordsService @(requires : 'admin') {
     @odata.draft.enabled
     entity Records             as select from my.Records;
 
@@ -11,15 +10,19 @@ service TimetrackingService {
                 title,
                 description,
                 billingFactor,
-                count(records.ID) as recordsCount : Integer,
-                sum(records.time) as totalTime :    Decimal(13, 2),
+                count(
+                    records.ID
+                ) as recordsCount : Integer,
+                sum(
+                    records.time
+                ) as totalTime    : Decimal(13, 2),
                 createdAt,
                 createdBy,
                 modifiedAt,
                 modifiedBy,
                 customer,
                 records,
-                members : redirected to ProjectMembers
+                members           : redirected to ProjectMembers
         }
         group by
             Projects.ID,
@@ -34,23 +37,35 @@ service TimetrackingService {
 
     entity Employees           as
         select from my.Employees {
-            * ,
-            count(records.ID)                    as recordsCount : Integer,
-            round(sum(records.time), 2)          as billingTime :  Double,
-            round(sum((records.time) / 1440), 2) as bonus :        Double,
-            projects : redirected to EmployeesProjects,
+            *,
+            count(
+                records.ID
+            ) as recordsCount : Integer,
+            round(
+                sum(
+                    records.time
+                ), 2
+            ) as billingTime  : Double,
+            round(
+                sum(
+                    (
+                        records.time
+                    ) / 1440
+                ), 2
+            ) as bonus        : Double,
+            projects          : redirected to EmployeesProjects,
             records
         }
         group by
-                       Employees.ID,
-                       Employees.daysOfLeave,
-                       Employees.daysOfTravel,
-                       Employees.billingTime,
-                       Employees.createdAt,
-                       Employees.createdBy,
-                       Employees.modifiedAt,
-                       Employees.modifiedBy,
-                       Employees.name;
+            Employees.ID,
+            Employees.daysOfLeave,
+            Employees.daysOfTravel,
+            Employees.billingTime,
+            Employees.createdAt,
+            Employees.createdBy,
+            Employees.modifiedAt,
+            Employees.modifiedBy,
+            Employees.name;
 
     entity Packages            as projection on my.Packages;
 

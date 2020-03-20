@@ -1,0 +1,62 @@
+<mvc:View controllerName="iot.timetracking.records.controller.Worklist" 
+	xmlns="sap.m" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:semantic="sap.f.semantic">
+
+	<Page id="page" title="Zeiterfassung">
+		<content>
+			<Table id="table" width="auto" fixedLayout="false" items="{
+					path: '/RecordsView',
+					sorter: [{
+						path: 'date',
+						group: true,
+						descending: true
+					}]
+				}" mode="MultiSelect" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished">
+
+				<headerToolbar>
+					<Toolbar>
+						<Title id="tableHeader" text="Arbeitszeit" width="100%"/>
+						<ToolbarSpacer />
+						<SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search=".onSearch"/>
+						<Button text="Abrechnen" press="onPressCreateInvoice"/>
+					</Toolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column>
+						<Text text="Tätigkeit"/>
+					</Column>
+					<Column demandPopin="true" minScreenWidth="tablet">
+						<Text text="Projekt"/>
+					</Column>
+					<Column demandPopin="true" minScreenWidth="desktop">
+						<Text text="Kunde"/>
+					</Column>
+					<Column demandPopin="true" minScreenWidth="desktop">
+						<Text text="Datum"/>
+					</Column>
+					<Column hAlign="End">
+						<Text text="Dauer"/>
+					</Column>
+					<Column>
+						<Text text="Status"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier title="{title}" text="{description}"/>
+							<Text text="{project/title}"/>
+							<Text text="{project/customer/name}"/>
+							<Text text="{date}"/>
+							<ObjectNumber number="{time}"/>
+							<ObjectStatus text="{path: 'status', formatter: '.formatter.dynamicText'}" icon="{path: 'status', formatter: '.formatter.statusIcon'}" state="{path: 'status', formatter: '.formatter.statusColour'}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Page>Ì
+
+</mvc:View>
