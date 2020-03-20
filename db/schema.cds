@@ -6,17 +6,16 @@ using {
 } from '@sap/cds/common';
 
 entity Records : cuid, managed {
-  title       : String;
-  description : String;
-  time        : Decimal(4, 2);
-  timeUnit    : String;
-  date        : Date;
-  status      : String enum {
+  title         : String;
+  description   : String;
+  time          : Decimal(4, 2);
+  timeUnit      : String;
+  date          : Date;
+  status        : String enum {
     INITIAL;
     BILLED;
   };
-  employee    : Association to one Employees;
-  project     : Association to one EmployeesToProjects;
+  projectMember : Association to one EmployeesToProjects;
 }
 
 entity Projects : cuid, managed {
@@ -33,34 +32,35 @@ entity Projects : cuid, managed {
 }
 
 entity Employees : cuid, managed {
-  name         : String;
-  username     : String;
-  travels      : Composition of many Travels
-                   on travels.employee = $self;
-  leaves       : Composition of many Leaves
-                   on leaves.employee = $self;
-  projects     : Composition of many EmployeesToProjects
-                   on projects.employee = $self;
-  records      : Association to many Records
-                   on records.employee = $self;
-  recordsCount : Integer;
-  daysOfTravel : Integer @title : '{i18n>Employees.DaysOfTravel}';
-  daysOfLeave  : Integer @title : '{i18n>Employees.DaysOfLeave}';
-  billingTime  : Integer;
-  bonus        : Integer;
+  name          : String;
+  username      : String;
+  projectsCount : Integer;
+  travels       : Composition of many Travels
+                    on travels.employee = $self;
+  leaves        : Composition of many Leaves
+                    on leaves.employee = $self;
+  projects      : Composition of many EmployeesToProjects
+                    on projects.employee = $self;
+  recordsCount  : Integer;
+  daysOfTravel  : Integer @title : '{i18n>Employees.DaysOfTravel}';
+  daysOfLeave   : Integer @title : '{i18n>Employees.DaysOfLeave}';
+  billingTime   : Integer;
+  bonus         : Integer;
 }
 
 entity EmployeesToProjects : cuid, managed {
-  project_ID  : UUID;
-  employee_ID : UUID;
+  // project_ID  : UUID;
+  // employee_ID : UUID;
   title       : String;
   username    : String;
+  name        : String;
   records     : Association to many Records
-                  on records.project = $self;
-  project     : Association to one Projects
-                  on project.ID = project_ID;
-  employee    : Association to one Employees
-                  on employee.ID = employee_ID;
+                  // and records.employee = $self
+                  on records.projectMember = $self;
+  project     : Association to one Projects;
+                  // on project.ID = project_ID;
+  employee    : Association to one Employees;
+                  // on employee.ID = employee_ID;
 }
 
 entity Customers : cuid, managed {

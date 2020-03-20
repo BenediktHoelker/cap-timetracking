@@ -15,18 +15,18 @@ annotate my.Records with @(UI : {
     SelectionFields : [
     title,
     description,
-    project_ID,
-    employee_ID,
+    projectMember.title,
+    projectMember.name,
     date
     ],
     LineItem        : [
     {Value : title},
     {
-        Value : project.title,
+        Value : projectMember.title,
         Label : '{i18n>Project}'
     },
     {
-        Value : employee.name,
+        Value : projectMember.name,
         Label : '{i18n>Employee}'
     },
     {Value : description},
@@ -36,27 +36,27 @@ annotate my.Records with @(UI : {
 });
 
 annotate my.Records with {
-    ID          @title : '{i18n>RecordID}'  @UI.Hidden;
-    title       @title : '{i18n>RecordTitle}';
-    date        @title : '{i18n>Date}';
-    time        @title : '{i18n>Duration}';
-    description @title : '{i18n>RecordDescription}'  @UI.MultiLineText;
-    project     @(
+    ID            @title : '{i18n>RecordID}'  @UI.Hidden;
+    title         @title : '{i18n>RecordTitle}';
+    date          @title : '{i18n>Date}';
+    time          @title : '{i18n>Duration}';
+    description   @title : '{i18n>RecordDescription}'  @UI.MultiLineText;
+    projectMember @(
         Common : {
-            Text             : project.title,
+            Text             : projectMember.title,
             FieldControl     : #Mandatory,
-            ValueList.entity : 'EmployeesProjects'
+            ValueList.entity : 'ProjectMembers'
         },
         title  : '{i18n>Project}'
     );
-    employee    @(
-        Common : {
-            Text             : employee.name,
-            FieldControl     : #Mandatory,
-            ValueList.entity : 'Employees'
-        },
-        title  : '{i18n>Employee}'
-    );
+// employee    @(
+//     Common : {
+//         Text             : employee.name,
+//         FieldControl     : #Mandatory,
+//         ValueList.entity : 'ProjectMembers'
+//     },
+//     title  : '{i18n>Employee}'
+// );
 }
 
 annotate my.Projects with @(UI : {
@@ -100,20 +100,27 @@ annotate my.Projects with {
 }
 
 annotate my.Employees with {
-    ID           @title : '{i18n>EmployeeID}'  @UI.HiddenFilter;
-    name         @title : '{i18n>EmployeeName}';
-    recordsCount @title : '{i18n>RecordsCount}';
-    billingTime  @title : '{i18n>BillingTime}';
-    bonus        @title : '{i18n>Bonus}';
+    ID            @title : '{i18n>EmployeeID}'  @UI.HiddenFilter;
+    name          @title : '{i18n>EmployeeName}';
+    recordsCount  @title : '{i18n>RecordsCount}';
+    projectsCount @title : '{i18n>ProjectsCount}';
+    billingTime   @title : '{i18n>BillingTime}';
+    bonus         @title : '{i18n>Bonus}';
 }
 
-annotate my.EmployeesProjects with @(UI : {
+annotate my.ProjectMembers with @(UI : {
     Identification  : [{Value : title}],
     SelectionFields : [title],
-    LineItem        : [{
+    LineItem        : [
+    {
         Value : title,
         Label : '{i18n>ProjectTitle}'
-    }]
+    },
+    {
+        Value : name,
+        Label : '{i18n>EmployeeName}'
+    }
+    ]
 });
 
 annotate my.ProjectMembers with {
@@ -143,6 +150,10 @@ annotate my.Employees with @(UI : {
     {
         Value : recordsCount,
         Label : '{i18n>RecordsCount}'
+    },
+    {
+        Value : projectsCount,
+        Label : '{i18n>ProjectsCount}'
     },
     {
         Value : billingTime,
