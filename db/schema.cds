@@ -19,6 +19,48 @@ entity Records : cuid, managed {
   project     : Association to one EmployeesToProjects;
 }
 
+entity Projects : cuid, managed {
+  title         : String;
+  description   : String;
+  billingFactor : Decimal(5, 2);
+  recordsCount  : Integer;
+  totalTime     : Integer;
+  packages      : Association to many Packages
+                    on packages.project = $self;
+  members       : Association to many EmployeesToProjects
+                    on members.project = $self;
+  customer      : Association to one Customers;
+}
+
+entity Employees : cuid, managed {
+  name         : String;
+  travels      : Composition of many Travels
+                   on travels.employee = $self;
+  leaves       : Composition of many Leaves
+                   on leaves.employee = $self;
+  projects     : Composition of many EmployeesToProjects
+                   on projects.employee = $self;
+  records      : Association to many Records
+                   on records.employee = $self;
+  recordsCount : Integer;
+  daysOfTravel : Integer @title : '{i18n>Employees.DaysOfTravel}';
+  daysOfLeave  : Integer @title : '{i18n>Employees.DaysOfLeave}';
+  billingTime  : Integer;
+  bonus        : Integer;
+}
+
+entity EmployeesToProjects : cuid, managed {
+  project_ID  : UUID;
+  employee_ID : UUID;
+  title       : String;
+  records     : Association to many Records
+                  on records.project = $self;
+  project     : Association to one Projects
+                  on project.ID = project_ID;
+  employee    : Association to one Employees
+                  on employee.ID = employee_ID;
+}
+
 entity Customers : cuid, managed {
   name          : String;
   projectsCount : Integer;
@@ -71,51 +113,10 @@ entity InvoicesView as
     Invoices.modifiedAt,
     Invoices.modifiedBy;
 
-entity Projects : cuid, managed {
-  title         : String;
-  description   : String;
-  billingFactor : Decimal(5, 2);
-  recordsCount  : Integer;
-  totalTime     : Integer;
-  packages      : Association to many Packages
-                    on packages.project = $self;
-  members       : Association to many EmployeesToProjects
-                    on members.project = $self;
-  customer      : Association to one Customers;
-}
-
-entity EmployeesToProjects : cuid, managed {
-  project_ID  : UUID;
-  employee_ID : UUID;
-  records       : Association to many Records
-                    on records.project = $self;
-  project     : Association to one Projects
-                  on project.ID = project_ID;
-  employee    : Association to one Employees
-                  on employee.ID = employee_ID;
-}
-
 entity Packages : cuid, managed {
   title       : String;
   description : String;
   project     : Association to one Projects;
-}
-
-entity Employees : cuid, managed {
-  name         : String;
-  travels      : Composition of many Travels
-                   on travels.employee = $self;
-  leaves       : Composition of many Leaves
-                   on leaves.employee = $self;
-  projects     : Composition of many EmployeesToProjects
-                   on projects.employee = $self;
-  records      : Association to many Records
-                   on records.employee = $self;
-  recordsCount : Integer;
-  daysOfTravel : Integer @title : '{i18n>Employees.DaysOfTravel}';
-  daysOfLeave  : Integer @title : '{i18n>Employees.DaysOfLeave}';
-  billingTime  : Integer;
-  bonus        : Integer;
 }
 
 entity Travels : cuid, managed {
