@@ -7,11 +7,11 @@ annotate my.Employees with @(UI : {
             Label  : '{i18n>General}',
             Target : '@UI.FieldGroup#General'
         },
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Label  : '{i18n>Records}',
-            Target : 'records/@UI.LineItem'
-        },
+        // {
+        //     $Type  : 'UI.ReferenceFacet',
+        //     Label  : '{i18n>Records}',
+        //     Target : 'records/@UI.LineItem'
+        // },
         {
             $Type  : 'UI.ReferenceFacet',
             Label  : '{i18n>Projects}',

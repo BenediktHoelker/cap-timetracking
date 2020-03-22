@@ -60,7 +60,7 @@
                     "target": "CustomerDetails"
                 },
                 {
-                    "pattern": "Customers({key}/projects({key2}):?query:",
+                    "pattern": "Customers({key})/projects({key2}):?query:",
                     "name": "ProjectDetails",
                     "target": "ProjectDetails"
                 }
@@ -101,7 +101,7 @@
                         "settings": {
                             "entitySet": "Projects",
                             "navigation": {
-                                "Projects": {
+                                "projects": {
                                     "detail": {
                                         "route": "ProjectDetails"
                                     }

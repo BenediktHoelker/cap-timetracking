@@ -16,6 +16,7 @@ entity Records : cuid, managed {
     BILLED;
   };
   projectMember : Association to one EmployeesToProjects;
+  employee      : Association to one Employees;
 }
 
 entity Projects : cuid, managed {
@@ -41,6 +42,8 @@ entity Employees : cuid, managed {
                     on leaves.employee = $self;
   projects      : Composition of many EmployeesToProjects
                     on projects.employee = $self;
+  records       : Association to many Records
+                    on records.employee = $self;
   recordsCount  : Integer;
   daysOfTravel  : Integer @title : '{i18n>Employees.DaysOfTravel}';
   daysOfLeave   : Integer @title : '{i18n>Employees.DaysOfLeave}';
@@ -51,16 +54,16 @@ entity Employees : cuid, managed {
 entity EmployeesToProjects : cuid, managed {
   // project_ID  : UUID;
   // employee_ID : UUID;
-  title       : String;
-  username    : String;
-  name        : String;
-  records     : Association to many Records
-                  // and records.employee = $self
-                  on records.projectMember = $self;
-  project     : Association to one Projects;
-                  // on project.ID = project_ID;
-  employee    : Association to one Employees;
-                  // on employee.ID = employee_ID;
+  title    : String;
+  username : String;
+  name     : String;
+  records  : Association to many Records
+               // and records.employee = $self
+               on records.projectMember = $self;
+  project  : Association to one Projects;
+  // on project.ID = project_ID;
+  employee : Association to one Employees;
+// on employee.ID = employee_ID;
 }
 
 entity Customers : cuid, managed {

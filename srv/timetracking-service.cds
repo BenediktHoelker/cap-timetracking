@@ -73,11 +73,7 @@ service TimetrackingService {
                         ) / 1440
                     ), 2
                 ) as bonus         : Double,
-                count(
-                    projects.ID
-                ) as projectsCount : Integer,
                 projects           : redirected to ProjectMembers,
-                projects.records
         }
         group by
             Employees.ID,

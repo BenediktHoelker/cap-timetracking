@@ -60,22 +60,22 @@
                     "target": "EmployeesDetails"
                 },
                 {
-                    "pattern": "Employees({key}/projects({key2}):?query:",
+                    "pattern": "Employees({key})/projects({key2}):?query:",
                     "name": "ProjectsDetails",
                     "target": "ProjectsDetails"
                 },
                 {
-                    "pattern": "Employees({key}/records({key2}):?query:",
+                    "pattern": "Employees({key})/records({key2}):?query:",
                     "name": "RecordsDetails",
                     "target": "RecordsDetails"
                 },
                 {
-                    "pattern": "Employees({key}/travels({key2}):?query:",
+                    "pattern": "Employees({key})/travels({key2}):?query:",
                     "name": "TravelDetails",
                     "target": "TravelDetails"
                 },
                 {
-                    "pattern": "Employees({key}/leaves({key2}):?query:",
+                    "pattern": "Employees({key})/leaves({key2}):?query:",
                     "name": "LeaveDetails",
                     "target": "LeaveDetails"
                 }
@@ -106,12 +106,12 @@
                         "settings": {
                             "entitySet": "Employees",
                             "navigation": {
-                                "Projects": {
+                                "projects": {
                                     "detail": {
                                         "route": "ProjectsDetails"
                                     }
                                 },
-                                "Records": {
+                                "records": {
                                     "detail": {
                                         "route": "RecordsDetails"
                                     }

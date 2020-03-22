@@ -151,10 +151,10 @@ annotate my.Employees with @(UI : {
         Value : recordsCount,
         Label : '{i18n>RecordsCount}'
     },
-    {
-        Value : projectsCount,
-        Label : '{i18n>ProjectsCount}'
-    },
+    // {
+    //     Value : projectsCount,
+    //     Label : '{i18n>ProjectsCount}'
+    // },
     {
         Value : billingTime,
         Label : '{i18n>BillingTime}'

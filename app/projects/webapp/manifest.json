@@ -37,7 +37,7 @@
                 "settings": {
                     "synchronizationMode": "None",
                     "operationMode": "Server",
-                    "autoExpandSelect" : true,
+                    "autoExpandSelect": true,
                     "earlyRequests": true,
                     "groupProperties": {
                         "default": {
@@ -60,12 +60,12 @@
                     "target": "ProjectDetails"
                 },
                 {
-                    "pattern": "Projects({key}/records({key2}):?query:",
+                    "pattern": "Projects({key})/records({key2}):?query:",
                     "name": "RecordDetails",
                     "target": "RecordDetails"
                 },
                 {
-                    "pattern": "Projects({key}/members({key2}):?query:",
+                    "pattern": "Projects({key})/members({key2}):?query:",
                     "name": "MemberDetails",
                     "target": "MemberDetails"
                 }
@@ -76,12 +76,12 @@
                     "id": "ProjectsList",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
-                        "settings" : {
-                            "entitySet" : "Projects",
-                            "navigation" : {
-                                "Projects" : {
-                                    "detail" : {
-                                        "route" : "ProjectDetails"
+                        "settings": {
+                            "entitySet": "Projects",
+                            "navigation": {
+                                "Projects": {
+                                    "detail": {
+                                        "route": "ProjectDetails"
                                     }
                                 }
                             }
@@ -93,8 +93,20 @@
                     "id": "ProjectDetails",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
-                        "settings" : {
-                            "entitySet" : "Projects"
+                        "settings": {
+                            "entitySet": "Projects",
+                            "navigation": {
+                                "records": {
+                                    "detail": {
+                                        "route": "RecordDetails"
+                                    }
+                                },
+                                "members": {
+                                    "detail": {
+                                        "route": "MemberDetails"
+                                    }
+                                }
+                            }
                         }
                     }
                 },
@@ -103,12 +115,12 @@
                     "id": "RecordDetails",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
-                        "settings" : {
-                            "entitySet" : "Records",
-                            "navigation" : {
-                                "Projects" : {
-                                    "detail" : {
-                                        "route" : "RecordDetails"
+                        "settings": {
+                            "entitySet": "Records",
+                            "navigation": {
+                                "records": {
+                                    "detail": {
+                                        "route": "RecordDetails"
                                     }
                                 }
                             }
@@ -120,12 +132,12 @@
                     "id": "MemberDetails",
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
-                        "settings" : {
-                            "entitySet" : "EmployeesToProjects",
-                            "navigation" : {
-                                "Projects" : {
-                                    "detail" : {
-                                        "route" : "MemberDetails"
+                        "settings": {
+                            "entitySet": "EmployeesToProjects",
+                            "navigation": {
+                                "members": {
+                                    "detail": {
+                                        "route": "MemberDetails"
                                     }
                                 }
                             }
