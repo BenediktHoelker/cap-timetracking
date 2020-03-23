@@ -126,7 +126,7 @@
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
-                            "entitySet": "EmployeesProjects"
+                            "entitySet": "ProjectMembers"
                         }
                     }
                 },

@@ -2,23 +2,20 @@ using {CustomersService as my} from '../../srv/customers-service';
 
 annotate my.Customers with @(UI : {
     Facets              : [
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Label  : '{i18n>General}',
-            Target : '@UI.FieldGroup#General'
-        },
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Label  : '{i18n>Projects}',
-            Target : 'projects/@UI.LineItem'
-        }
+    {
+        $Type  : 'UI.ReferenceFacet',
+        Label  : '{i18n>General}',
+        Target : '@UI.FieldGroup#General'
+    },
+    {
+        $Type  : 'UI.ReferenceFacet',
+        Label  : '{i18n>Projects}',
+        Target : 'projects/@UI.LineItem'
+    }
     ],
     FieldGroup #General : {Data : [
-        {Value    : name},
-        {
-            Value : projectsCount,
-            Label : '{i18n>ProjectsCount}'
-        }
+    {Value : name},
+    {Value : projectsCount}
     ]}
 });
 
@@ -31,45 +28,39 @@ annotate my.Customers with @(UI : {
     Identification  : [{Value : name}],
     SelectionFields : [name],
     LineItem        : [
-        {
-            Value : name,
-            Label : '{i18n>Customer}'
-        },
-        {
-            Value : projectsCount,
-            Label : '{i18n>ProjectsCount}'
-        }
+    {Value : name},
+    {Value : projectsCount}
     ]
 });
 
 annotate my.Projects with @(UI : {
-    Facets              : [
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Label  : '{i18n>General}',
-            Target : '@UI.FieldGroup#General'
-        },
-        {
-            $Type  : 'UI.ReferenceFacet',
-            Label  : '{i18n>Admin}',
-            Target : '@UI.FieldGroup#Admin'
-        }
-    ],
-    HeaderInfo      : {
+    HeaderInfo          : {
         TypeName       : '{i18n>Project}',
         TypeNamePlural : '{i18n>Projects}',
         Title          : {Value : title},
         Description    : {Value : description}
     },
+    Facets              : [
+    {
+        $Type  : 'UI.ReferenceFacet',
+        Label  : '{i18n>General}',
+        Target : '@UI.FieldGroup#General'
+    },
+    {
+        $Type  : 'UI.ReferenceFacet',
+        Label  : '{i18n>Admin}',
+        Target : '@UI.FieldGroup#Admin'
+    }
+    ],
     FieldGroup #General : {Data : [
-        {Value : title},
-        {Value : description},
-        {Value : billingFactor}
+    {Value : title},
+    {Value : description},
+    {Value : billingFactor}
     ]},
     FieldGroup #Admin   : {Data : [
-        {Value : createdBy},
-        {Value : createdAt},
-        {Value : modifiedBy},
-        {Value : modifiedAt}
+    {Value : createdBy},
+    {Value : createdAt},
+    {Value : modifiedBy},
+    {Value : modifiedAt}
     ]}
 });

@@ -6,36 +6,42 @@ using {
 } from '@sap/cds/common';
 
 entity Records : cuid, managed {
-  title         : String;
-  description   : String;
-  time          : Decimal(4, 2);
-  timeUnit      : String;
-  date          : Date;
-  status        : String enum {
+  title         : String                                 @title : '{i18n>Records.title}';
+  description   : String                                 @title : '{i18n>Records.description}';
+  time          : Decimal(4, 2)                          @title : '{i18n>Records.time}';
+  timeUnit      : String                                 @title : '{i18n>Records.timeUnit}';
+  date          : Date                                   @title : '{i18n>Records.date}';
+  status        : String                                 @title : '{i18n>Records.status}'
+  enum {
     INITIAL;
     BILLED;
   };
-  projectMember : Association to one EmployeesToProjects;
-  employee      : Association to one Employees;
+  projectMember : Association to one EmployeesToProjects @title : '{i18n>Records.projectMember}';
+  employee      : Association to one Employees           @title : '{i18n>Records.employee}';
 }
 
 entity Projects : cuid, managed {
-  title         : String;
-  description   : String;
-  billingFactor : Decimal(5, 2);
-  recordsCount  : Integer;
-  totalTime     : Integer;
+  title         : String                       @title : '{i18n>Projects.title}';
+  description   : String                       @title : '{i18n>Projects.description}';
+  billingFactor : Decimal(5, 2)                @title : '{i18n>Projects.billingFactor}';
+  recordsCount  : Integer                      @title : '{i18n>Projects.recordsCount}';
+  totalTime     : Integer                      @title : '{i18n>Projects.totalTime}';
+  customer      : Association to one Customers @title : '{i18n>Projects.customer}';
   packages      : Association to many Packages
                     on packages.project = $self;
-  members       : Association to many EmployeesToProjects
+  members       : Composition of many EmployeesToProjects
                     on members.project = $self;
-  customer      : Association to one Customers;
 }
 
 entity Employees : cuid, managed {
-  name          : String;
-  username      : String;
-  projectsCount : Integer;
+  name          : String  @title : '{i18n>Employees.name}';
+  username      : String  @title : '{i18n>Employees.username}';
+  projectsCount : Integer @title : '{i18n>Employees.projectsCount}';
+  recordsCount  : Integer @title : '{i18n>Employees.recordsCount}';
+  daysOfTravel  : Integer @title : '{i18n>Employees.daysOfTravel}';
+  daysOfLeave   : Integer @title : '{i18n>Employees.daysOfLeave}';
+  billingTime   : Integer @title : '{i18n>Employees.billingTime}';
+  bonus         : Integer @title : '{i18n>Employees.bonus}';
   travels       : Composition of many Travels
                     on travels.employee = $self;
   leaves        : Composition of many Leaves
@@ -44,31 +50,59 @@ entity Employees : cuid, managed {
                     on projects.employee = $self;
   records       : Association to many Records
                     on records.employee = $self;
-  recordsCount  : Integer;
-  daysOfTravel  : Integer @title : '{i18n>Employees.DaysOfTravel}';
-  daysOfLeave   : Integer @title : '{i18n>Employees.DaysOfLeave}';
-  billingTime   : Integer;
-  bonus         : Integer;
 }
 
 entity EmployeesToProjects : cuid, managed {
-  title    : String;
-  username : String;
-  name     : String;
-  records  : Association to many Records
-               on records.projectMember = $self;
-  project  : Association to one Projects;
-  employee : Association to one Employees;
+  title         : String                       @title : '{i18n>EmployeesToProjects.title}';
+  username      : String                       @title : '{i18n>EmployeesToProjects.username}';
+  name          : String                       @title : '{i18n>EmployeesToProjects.name}';
+  projectMember : String                       @title : '{i18n>EmployeesToProjects.projectMember}';
+  project       : Association to one Projects  @title : '{i18n>EmployeesToProjects.project}';
+  employee      : Association to one Employees @title : '{i18n>EmployeesToProjects.employee}';
+  records       : Association to many Records
+                    on records.projectMember = $self;
 }
 
 entity Customers : cuid, managed {
-  name          : String;
-  projectsCount : Integer;
-  projects      : Association to many Projects
+  name          : String  @title : '{i18n>Customers.name}';
+  projectsCount : Integer @title : '{i18n>Customers.projectsCount}';
+  projects      : Composition of many Projects
                     on projects.customer = $self;
   invoices      : Association to many Invoices
                     on invoices.customer = $self;
 }
+
+entity Packages : cuid, managed {
+  title       : String                      @title : '{i18n>Packages.title}';
+  description : String                      @title : '{i18n>Packages.description}';
+  project     : Association to one Projects @title : '{i18n>Packages.project}';
+}
+
+entity Travels : cuid, managed {
+  daysOfTravel  : Integer                      @readonly  @title : '{i18n>Travels.daysOfTravel}';
+  dateFrom      : Date                         @title :            '{i18n>Travels.dateFrom}';
+  dateTo        : Date                         @title :            '{i18n>Travels.dateTo}';
+  journey       : Decimal(4, 2)                @title :            '{i18n>Travels.journey}';
+  returnJourney : Decimal(4, 2)                @title :            '{i18n>Travels.returnJourney}';
+  durationUnit  : String                       @title :            '{i18n>Travels.durationUnit}' enum {
+    h;
+    m;
+  };
+  project       : Association to one Projects  @title :            '{i18n>Travels.project}';
+  employee      : Association to one Employees @title :            '{i18n>Travels.employee}';
+}
+
+entity Leaves : cuid, managed {
+  reason      : String                       @title :            '{i18n>Leaves.reason}' enum {
+    ILLNESS;
+    VACATION;
+  };
+  dateFrom    : Date                         @title :            '{i18n>Leaves.dateFrom}';
+  dateTo      : Date                         @title :            '{i18n>Leaves.dateTo}';
+  daysOfLeave : Integer                      @readonly  @title : '{i18n>Leaves.daysOfLeave}';
+  employee    : Association to one Employees @title :            '{i18n>Leaves.employee}';
+}
+
 
 view CustomersView as
   select from timetracking.Customers {
@@ -92,8 +126,8 @@ entity Invoices : cuid, managed {
 }
 
 entity InvoiceItems : cuid, managed {
-  invoice   : Association to one Invoices;
   record_ID : UUID;
+  invoice   : Association to one Invoices;
   record    : Association to one Records
                 on record.ID = record_ID;
 }
@@ -112,34 +146,3 @@ entity InvoicesView as
     Invoices.createdBy,
     Invoices.modifiedAt,
     Invoices.modifiedBy;
-
-entity Packages : cuid, managed {
-  title       : String;
-  description : String;
-  project     : Association to one Projects;
-}
-
-entity Travels : cuid, managed {
-  project       : Association to Projects;
-  employee      : Association to Employees;
-  daysOfTravel  : Integer      @readonly;
-  dateFrom      : Date         @title : '{i18n>Travels.DateFrom}';
-  dateTo        : Date         @title : '{i18n>Travels.DateTo}';
-  journey       : Decimal(4, 2)@title : '{i18n>Travels.Journey}';
-  returnJourney : Decimal(4, 2)@title : '{i18n>Travels.ReturnJourney}';
-  durationUnit  : String enum {
-    h;
-    m;
-  };
-}
-
-entity Leaves : cuid, managed {
-  reason      : String enum {
-    ILLNESS;
-    VACATION;
-  };
-  dateFrom    : Date    @title : '{i18n>Leaves.DateFrom}';
-  dateTo      : Date    @title : '{i18n>Leaves.DateTo}';
-  daysOfLeave : Integer @readonly;
-  employee    : Association to Employees;
-}

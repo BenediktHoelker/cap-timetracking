@@ -2,21 +2,9 @@ using {my.timetracking as my} from '../db/schema';
 
 // service TimetrackingService @(requires:'authenticated-user') {
 service TimetrackingService {
-    entity Records        as
-        select from my.Records {
-            key ID,
-                createdAt,
-                createdBy,
-                date,
-                description,
-                modifiedAt,
-                modifiedBy,
-                status,
-                time,
-                timeUnit,
-                title,
-                projectMember
-        };
+    entity Records        as projection on my.Records {
+        key ID, createdAt, createdBy, date, description, modifiedAt, modifiedBy, status, time, timeUnit, title, projectMember
+    };
 
     entity Projects       as
         select from my.Projects {
@@ -56,24 +44,24 @@ service TimetrackingService {
                 modifiedAt,
                 modifiedBy,
                 name,
-                count(
-                    projects.records.ID
-                ) as recordsCount  : Integer,
-                0 as daysOfTravel  : Integer,
-                0 as daysOfLeave   : Integer,
+                daysOfLeave,
+                daysOfTravel,
                 round(
                     sum(
                         projects.records.time
                     ), 2
-                ) as billingTime   : Double,
+                ) as billingTime  : Double,
+                count(
+                    projects.records.ID
+                ) as recordsCount : Integer,
                 round(
                     sum(
                         (
                             projects.records.time
                         ) / 1440
                     ), 2
-                ) as bonus         : Double,
-                projects           : redirected to ProjectMembers,
+                ) as bonus        : Double,
+                projects          : redirected to ProjectMembers,
         }
         group by
             Employees.ID,
@@ -117,6 +105,7 @@ service TimetrackingService {
         select from my.EmployeesToProjects {
             *,
             project.title,
+            project.title || ' - ' || employee.name as projectMember : String,
             employee.username,
             employee.name
         };

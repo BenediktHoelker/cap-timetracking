@@ -133,9 +133,9 @@
                     "name": "sap.fe.templates.ObjectPage",
                     "options": {
                         "settings": {
-                            "entitySet": "EmployeesToProjects",
+                            "entitySet": "ProjectMembers",
                             "navigation": {
-                                "members": {
+                                "ProjectMembers": {
                                     "detail": {
                                         "route": "MemberDetails"
                                     }
