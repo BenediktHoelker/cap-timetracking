@@ -25,3 +25,8 @@ annotate my.Employees with @(UI : {
     ],
     FieldGroup #General : {Data : [{Value : name}]}
 });
+
+annotate my.ProjectMembers with @(UI : {
+    FieldGroup #General : {Data : [{Value : project_ID}]},
+    LineItem            : [{Value : project.title}]
+});

@@ -123,8 +123,8 @@ annotate my.ProjectMembers with @(UI : {
     title
     ],
     LineItem            : [
-    {Value : employee_ID},
-    {Value : project_ID}
+    {Value : employee.name},
+    {Value : project.title}
     ]
 });
 

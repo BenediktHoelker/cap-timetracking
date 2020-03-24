@@ -71,12 +71,13 @@ annotate my.ProjectMembers with @(UI : {
 });
 
 annotate my.ProjectMembers with {
+    ID       @UI.Hidden;
     employee @(
-        Common           : {
+        Common    : {
             Text         : employee.name,
             FieldControl : #Mandatory
         },
-        ValueList.entity : 'Employees',
-        title            : '{i18n>Employee}'
+        ValueList : {entity : 'Employees'},
+        title     : '{i18n>Employee}'
     );
 }

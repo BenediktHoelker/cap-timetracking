@@ -66,7 +66,7 @@ entity EmployeesToProjects : cuid, managed {
 entity Customers : cuid, managed {
   name          : String  @title : '{i18n>Customers.name}';
   projectsCount : Integer @title : '{i18n>Customers.projectsCount}';
-  projects      : Composition of many Projects
+  projects      : Association to many Projects
                     on projects.customer = $self;
   invoices      : Association to many Invoices
                     on invoices.customer = $self;

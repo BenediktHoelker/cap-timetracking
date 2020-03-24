@@ -2,11 +2,11 @@ using {my.timetracking as my} from '../db/schema';
 
 // service TimetrackingService @(requires:'authenticated-user') {
 service TimetrackingService {
-    entity Records        as projection on my.Records {
+    entity Records            as projection on my.Records {
         key ID, createdAt, createdBy, date, description, modifiedAt, modifiedBy, status, time, timeUnit, title, projectMember
     };
 
-    entity Projects       as
+    entity Projects           as
         select from my.Projects {
             key ID,
                 title,
@@ -36,7 +36,7 @@ service TimetrackingService {
             Projects.billingFactor,
             Projects.customer;
 
-    entity Employees      as
+    entity Employees          as
         select from my.Employees {
             key ID,
                 createdAt,
@@ -72,9 +72,9 @@ service TimetrackingService {
             Employees.modifiedBy,
             Employees.name;
 
-    entity Packages       as projection on my.Packages;
+    entity Packages           as projection on my.Packages;
 
-    entity Customers      as
+    entity Customers          as
         select from my.Customers {
             *,
             count(
@@ -91,17 +91,17 @@ service TimetrackingService {
             Customers.name;
 
 
-    entity Invoices       as projection on my.Invoices;
+    entity Invoices           as projection on my.Invoices;
 
-    entity InvoiceItems   as projection on my.InvoiceItems {
+    entity InvoiceItems       as projection on my.InvoiceItems {
         * , invoice : redirected to Invoices
     };
 
-    entity Leaves         as projection on my.Leaves;
-    entity Travels        as projection on my.Travels;
-    entity InvoicesView   as projection on my.InvoicesView;
+    entity Leaves             as projection on my.Leaves;
+    entity Travels            as projection on my.Travels;
+    entity InvoicesView       as projection on my.InvoicesView;
 
-    entity ProjectMembers as
+    entity ProjectMembers     as
         select from my.EmployeesToProjects {
             *,
             project.title,
