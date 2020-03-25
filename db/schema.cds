@@ -16,7 +16,7 @@ entity Records : cuid, managed {
     INITIAL;
     BILLED;
   };
-  invoice       : Association to one InvoiceItems        @title : '{i18n>Records.invoiceItem}';
+  invoiceItem   : Association to one InvoiceItems        @title : '{i18n>Records.invoiceItem}';
   projectMember : Association to one EmployeesToProjects @title : '{i18n>Records.projectMember}';
   employee      : Association to one Employees           @title : '{i18n>Records.employee}';
 }
@@ -121,16 +121,16 @@ view CustomersView as
     Customers.name;
 
 entity Invoices : cuid, managed {
-  customer : Association to one Customers;
-  items    : Composition of many InvoiceItems
-               on items.invoice = $self;
+  title       : String                       @title : '{i18n>Invoices.title}';
+  description : String                       @title : '{i18n>Invoices.description}';
+  customer    : Association to one Customers @title : '{i18n>Invoices.customer}';
+  items       : Composition of many InvoiceItems
+                  on items.invoice = $self;
 }
 
 entity InvoiceItems : cuid, managed {
-  record_ID : UUID;
-  invoice   : Association to one Invoices;
-  record    : Association to one Records
-                on record.ID = record_ID;
+  invoice : Association to one Invoices;
+  record  : Association to one Records;
 }
 
 entity InvoicesView as
