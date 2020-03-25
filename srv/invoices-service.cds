@@ -9,4 +9,6 @@ service InvoicesService @(requires : 'admin') {
 
     @odata.draft.enabled
     entity Invoices       as projection on my.Invoices;
+
+    entity InvoiceItems   as projection on my.InvoiceItems;
 }

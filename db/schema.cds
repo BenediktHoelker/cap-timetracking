@@ -16,7 +16,8 @@ entity Records : cuid, managed {
     INITIAL;
     BILLED;
   };
-  invoiceItem   : Association to one InvoiceItems        @title : '{i18n>Records.invoiceItem}';
+  invoiceItem   : Association to one InvoiceItems
+                    on invoiceItem.record = $self        @title : '{i18n>Records.invoiceItem}';
   projectMember : Association to one EmployeesToProjects @title : '{i18n>Records.projectMember}';
   employee      : Association to one Employees           @title : '{i18n>Records.employee}';
 }

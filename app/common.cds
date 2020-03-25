@@ -31,7 +31,8 @@ annotate my.Records with @(UI : {
     },
     {Value : description},
     {Value : date},
-    {Value : time}
+    {Value : time},
+    {Value : status},
     ]
 });
 
