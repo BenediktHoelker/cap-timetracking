@@ -73,12 +73,14 @@ service TimetrackingService {
         }
         group by
             Employees.ID,
-            Employees.billingTime,
             Employees.createdAt,
             Employees.createdBy,
             Employees.modifiedAt,
             Employees.modifiedBy,
-            Employees.name;
+            Employees.name,
+            Employees.daysOfLeave,
+            Employees.daysOfTravel;
+
 
     entity Packages       as projection on my.Packages;
 

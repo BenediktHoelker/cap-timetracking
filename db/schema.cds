@@ -142,9 +142,11 @@ entity InvoicesView as
     ) as amount : Double
   }
   group by
-    Invoices.ID,
-    Invoices.customer,
     Invoices.createdAt,
     Invoices.createdBy,
+    Invoices.customer,
+    Invoices.description,
+    Invoices.ID,
     Invoices.modifiedAt,
-    Invoices.modifiedBy;
+    Invoices.modifiedBy,
+    Invoices.title;
