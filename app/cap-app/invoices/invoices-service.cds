@@ -1,4 +1,4 @@
-using {InvoicesService as my} from '../../srv/invoices-service';
+using {InvoicesService as my} from '../../../srv/invoices-service';
 
 annotate my.Invoices with @(UI : {
     HeaderInfo          : {

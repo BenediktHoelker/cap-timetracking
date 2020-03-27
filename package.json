@@ -15,11 +15,11 @@
     "node": "^10.18.0"
   },
   "scripts": {
-    "build": "cds build/all --clean",
     "deploy": "cds deploy",
     "start": "cds run",
+     "build": "cds build/all --clean;cp gen/srv/srv/csn.json srv/gen/;cp -r gen/db/src/gen db/src",
     "build:mta": "cds build/all && mbt build -p=cf",
-    "deploy:cf": "npm run build:mta && cf deploy mta_archives/timetracking_1.0.4.mtar"
+    "deploy:cf": "npm run build:mta && cf deploy mta_archives/timetracking_1.0.6.mtar"
   },
   "devDependencies": {
     "sqlite3": "^4.1.1"

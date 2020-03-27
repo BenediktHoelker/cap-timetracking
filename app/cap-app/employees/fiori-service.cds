@@ -1,4 +1,4 @@
-using {EmployeesService as my} from '../../srv/employees-service';
+using {EmployeesService as my} from '../../../srv/employees-service';
 
 annotate my.Employees with @(UI : {
     Facets              : [

@@ -1,6 +1,8 @@
 _schema-version: 2.0.0
 ID: timetracking
-version: 1.0.4
+version: 1.0.7
+parameters:
+  enable-parallel-deployments: true
 modules:
   - name: timetracking-db
     type: hdb
@@ -14,21 +16,22 @@ modules:
     type: nodejs
     path: srv
     parameters:
-      memory: 512M
-      disk-quota: 256M
+      memory: 1024M
+      disk-quota: 1024M
     provides:
       - name: srv_api
         properties:
           url: ${default-url}
     requires:
       - name: timetracking-db-hdi-container
-
   - name: timetracking-ui
     type: nodejs
     path: app
+    deployed-after:
+      - timetracking-srv
     parameters:
-      memory: 256M
-      disk-quota: 256M
+      memory: 1024M
+      disk-quota: 1024M
     requires:
       - name: srv_api
         group: destinations

@@ -23,18 +23,5 @@
                 }
             }
         ]
-    },
-    "auth": {
-        "passport": {
-            "strategy": "mock",
-            "users": {
-                "alice": {
-                    "roles": [
-                        "admin"
-                    ]
-                },
-                "christian": {}
-            }
-        }
     }
 }

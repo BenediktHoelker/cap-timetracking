@@ -93,7 +93,7 @@ service TimetrackingService {
             invoices                                                       : redirected to Invoices
         }
         group by
-            Customers.ID,
+                Customers.ID,
             Customers.createdAt,
             Customers.createdBy,
             Customers.modifiedAt,

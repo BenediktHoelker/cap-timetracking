@@ -1,12 +1,15 @@
 {
-    "welcomeFile": "webapp/",
+    "welcomeFile": "/app/index.html",
     "authenticationMethod": "none",
-    "routes": [{
-        "source": "^/webapp/(.*)$",
-        "target": "$1",
-        "localDir": "webapp/"
-    }, {
-        "source": "^(.*)$",
-        "destination": "srv_api"
-    }]
+    "routes": [
+        {
+          "source": "^/app/(.*)$",
+          "target": "$1",
+          "localDir": "cap-app/"
+        },
+        {
+            "source": "^(.*)$",
+            "destination": "srv_api"
+        }
+    ]
 }

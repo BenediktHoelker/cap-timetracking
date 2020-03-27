@@ -1,4 +1,4 @@
-using {ProjectsService as my} from '../../srv/projects-service';
+using {ProjectsService as my} from './projects-service';
 
 annotate my.Projects with @(UI : {
     HeaderInfo          : {
