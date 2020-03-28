@@ -2,7 +2,7 @@
   Common Annotations shared by all apps
 */
 
-using {TimetrackingService as my} from './srv/timetracking-service';
+using {TimetrackingService as my} from '../srv/timetracking-service';
 
 annotate my.Records with @(UI : {
     HeaderInfo      : {

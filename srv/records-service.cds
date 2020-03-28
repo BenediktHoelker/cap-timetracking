@@ -1,6 +1,6 @@
 using {TimetrackingService as my} from './timetracking-service';
 
-service RecordsService @(requires : 'authenticated-user') {
+service RecordsService {
     @odata.draft.enabled
     entity Records      as projection on my.Records actions {
         // bound actions/functions

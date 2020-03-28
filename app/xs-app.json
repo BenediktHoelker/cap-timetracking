@@ -3,9 +3,9 @@
     "authenticationMethod": "none",
     "routes": [
         {
-          "source": "^/app/(.*)$",
+          "source": "/app/customers/(.*)$",
           "target": "$1",
-          "localDir": "cap-app/"
+          "localDir": "webapp/"
         },
         {
             "source": "^(.*)$",
