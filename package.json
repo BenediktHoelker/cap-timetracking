@@ -17,9 +17,9 @@
   "scripts": {
     "deploy": "cds deploy",
     "start": "cds run",
-     "build": "cds build/all --clean;cp gen/srv/srv/csn.json srv/gen/;cp -r gen/db/src/gen db/src",
-    "build:mta": "cds build/all && mbt build -p=cf",
-    "deploy:cf": "npm run build:mta && cf deploy mta_archives/timetracking_1.0.6.mtar"
+    "build:mta-cust": "cds build/all --clean;cp gen/srv/srv/csn.json srv/gen/;cp -r gen/db/src/gen db/src;mbt build -p=cf",
+    "build:mta": "cds build/all && cds deploy && mbt build -p=cf",
+    "deploy:cf": "npm run build:mta && cf deploy mta_archives/timetracking_1.0.8.mtar"
   },
   "devDependencies": {
     "sqlite3": "^4.1.1"
@@ -46,6 +46,7 @@
   },
   "files": [
     "db",
-    "srv"
+    "srv",
+    "app"
   ]
 }
