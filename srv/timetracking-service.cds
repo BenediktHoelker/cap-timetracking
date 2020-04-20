@@ -52,6 +52,7 @@ service TimetrackingService {
                 modifiedAt,
                 modifiedBy,
                 name,
+                username,
                 daysOfLeave,
                 daysOfTravel,
                 round(
@@ -78,6 +79,7 @@ service TimetrackingService {
             Employees.modifiedAt,
             Employees.modifiedBy,
             Employees.name,
+            Employees.username,
             Employees.daysOfLeave,
             Employees.daysOfTravel;
 
@@ -93,7 +95,7 @@ service TimetrackingService {
             invoices                                                       : redirected to Invoices
         }
         group by
-                Customers.ID,
+            Customers.ID,
             Customers.createdAt,
             Customers.createdBy,
             Customers.modifiedAt,
