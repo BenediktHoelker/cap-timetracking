@@ -6,20 +6,20 @@ using {
 } from '@sap/cds/common';
 
 entity Records : cuid, managed {
-  title         : String                                 @title : '{i18n>Records.title}';
-  description   : String                                 @title : '{i18n>Records.description}';
-  time          : Decimal(4, 2)                          @title : '{i18n>Records.time}';
-  timeUnit      : String                                 @title : '{i18n>Records.timeUnit}';
-  date          : Date                                   @title : '{i18n>Records.date}';
-  status        : String                                 @title : '{i18n>Records.status}'
+  title         : String                                 @title :            '{i18n>Records.title}';
+  description   : String                                 @title :            '{i18n>Records.description}';
+  time          : Decimal(4, 2)                          @title :            '{i18n>Records.time}';
+  timeUnit      : String default 'h'                     @readonly  @title : '{i18n>Records.timeUnit}';
+  date          : Date                                   @title :            '{i18n>Records.date}';
+  status        : String                                 @title :            '{i18n>Records.status}'
   enum {
     INITIAL;
     BILLED;
   };
   invoiceItem   : Association to one InvoiceItems
-                    on invoiceItem.record = $self        @title : '{i18n>Records.invoiceItem}';
-  projectMember : Association to one EmployeesToProjects @title : '{i18n>Records.projectMember}';
-  employee      : Association to one Employees           @title : '{i18n>Records.employee}';
+                    on invoiceItem.record = $self        @title :            '{i18n>Records.invoiceItem}';
+  projectMember : Association to one EmployeesToProjects @title :            '{i18n>Records.projectMember}';
+  employee      : Association to one Employees           @title :            '{i18n>Records.employee}';
 }
 
 entity Projects : cuid, managed {
@@ -86,7 +86,7 @@ entity Travels : cuid, managed {
   dateTo        : Date                         @title :            '{i18n>Travels.dateTo}';
   returnJourney : Decimal(4, 2)                @title :            '{i18n>Travels.returnJourney}';
   journey       : Decimal(4, 2)                @title :            '{i18n>Travels.journey}';
-  durationUnit  : String                       @title :            '{i18n>Travels.durationUnit}';
+  durationUnit  : String default 'h'           @readonly  @title : '{i18n>Travels.durationUnit}';
   project       : Association to one Projects  @title :            '{i18n>Travels.project}';
   employee      : Association to one Employees @title :            '{i18n>Travels.employee}';
 }
