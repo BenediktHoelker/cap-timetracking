@@ -3,13 +3,14 @@
     "authenticationMethod": "none",
     "routes": [
         {
-          "source": "^/app/(.*)$",
-          "target": "$1",
-          "localDir": "cap-app/"
+            "source": "^/app/(.*)$",
+            "target": "$1",
+            "localDir": "cap-app/"
         },
         {
             "source": "^(.*)$",
-            "destination": "srv_api"
+            "destination": "srv_api",
+            "authenticationType": "xsuaa"
         }
     ]
 }
