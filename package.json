@@ -6,6 +6,8 @@
   "license": "ISC",
   "dependencies": {
     "@sap/cds": "^3.33.1",
+    "@sap/xsenv": "^2.2.0",
+    "@sap/xssec": "^2.2.5",
     "express": "^4.17.1",
     "hdb": "^0.17.1",
     "mbt": "^1.0.13",
