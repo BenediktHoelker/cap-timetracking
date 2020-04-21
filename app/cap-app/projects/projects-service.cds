@@ -59,7 +59,7 @@ annotate my.ProjectMembers with @(UI : {
     Identification      : [{Value : employee_ID}],
     SelectionFields     : [employee_ID],
     LineItem            : [{
-        Value : employee_ID,
+        Value : employee.name,
         Label : '{i18n>Employee}'
     }],
     Facets              : [{

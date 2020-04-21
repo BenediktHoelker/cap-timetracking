@@ -115,6 +115,11 @@
                                     "detail": {
                                         "route": "RecordsDetails"
                                     }
+                                },
+                                "leaves": {
+                                    "detail": {
+                                        "route": "LeaveDetails"
+                                    }
                                 }
                             }
                         }

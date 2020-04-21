@@ -62,6 +62,15 @@ annotate my.Projects with {
     });
 }
 
+annotate my.Projects with @(UI : {
+    Identification  : [{Value : title}],
+    SelectionFields : [title],
+    LineItem        : [
+    {Value : title},
+    {Value : description}
+    ]
+});
+
 annotate my.Employees with @(UI : {
     HeaderInfo      : {
         TypeName       : '{i18n>Employee}',

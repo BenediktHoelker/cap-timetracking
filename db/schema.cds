@@ -92,16 +92,18 @@ entity Travels : cuid, managed {
 }
 
 entity Leaves : cuid, managed {
-  reason      : String                       @title :            '{i18n>Leaves.reason}' enum {
-    ILLNESS;
-    VACATION;
-  };
-  dateFrom    : Date                         @title :            '{i18n>Leaves.dateFrom}';
+  reason      : LeaveReason                  @title :            '{i18n>Leaves.reason}';
+  dateFrom    : Date
+                                             @title :            '{i18n>Leaves.dateFrom}';
   dateTo      : Date                         @title :            '{i18n>Leaves.dateTo}';
   daysOfLeave : Integer                      @readonly  @title : '{i18n>Leaves.daysOfLeave}';
   employee    : Association to one Employees @title :            '{i18n>Leaves.employee}';
 }
 
+type LeaveReason : String enum {
+  Vacation;
+  Illness
+}
 
 view CustomersView as
   select from timetracking.Customers {

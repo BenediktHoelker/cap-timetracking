@@ -12,7 +12,9 @@ service TimetrackingService {
                 else
                     'BILLED'
             end as status @(title : '{i18n>Records.status}') : String
-        };
+        }
+        order by
+            createdAt desc;
 
     entity Projects       as
         select from my.Projects {
@@ -71,6 +73,8 @@ service TimetrackingService {
                     ), 2
                 ) as bonus        @(title : '{i18n>Employees.bonus}')        : Double,
                 projects                                                     : redirected to ProjectMembers,
+                leaves,
+                travels
         }
         group by
             Employees.ID,
