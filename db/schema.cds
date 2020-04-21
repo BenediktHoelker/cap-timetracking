@@ -84,12 +84,9 @@ entity Travels : cuid, managed {
   daysOfTravel  : Integer                      @readonly  @title : '{i18n>Travels.daysOfTravel}';
   dateFrom      : Date                         @title :            '{i18n>Travels.dateFrom}';
   dateTo        : Date                         @title :            '{i18n>Travels.dateTo}';
-  journey       : Decimal(4, 2)                @title :            '{i18n>Travels.journey}';
   returnJourney : Decimal(4, 2)                @title :            '{i18n>Travels.returnJourney}';
-  durationUnit  : String                       @title :            '{i18n>Travels.durationUnit}' enum {
-    h;
-    m;
-  };
+  journey       : Decimal(4, 2)                @title :            '{i18n>Travels.journey}';
+  durationUnit  : String                       @title :            '{i18n>Travels.durationUnit}';
   project       : Association to one Projects  @title :            '{i18n>Travels.project}';
   employee      : Association to one Employees @title :            '{i18n>Travels.employee}';
 }
