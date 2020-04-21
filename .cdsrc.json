@@ -1,6 +1,6 @@
 {
     "build": {
-        "target": "gen",
+        "target": ".",
         "tasks": [
             {
                 "for": "hana",

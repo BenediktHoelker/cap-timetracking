@@ -19,7 +19,7 @@
     "start": "cds run",
     "build:mta-cust": "cds build/all --clean;cp gen/srv/srv/csn.json srv/gen/;cp -r gen/db/src/gen db/src;mbt build -p=cf",
     "build:mta": "cds build/all && cds deploy && mbt build -p=cf",
-    "deploy:cf": "npm run build:mta && cf deploy mta_archives/timetracking_1.0.8.mtar"
+    "deploy:cf": "npm run build:mta && cf deploy mta_archives/timetracking_1.0.11.mtar"
   },
   "devDependencies": {
     "sqlite3": "^4.1.1"
