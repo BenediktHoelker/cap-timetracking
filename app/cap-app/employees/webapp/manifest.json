@@ -116,6 +116,11 @@
                                         "route": "RecordsDetails"
                                     }
                                 },
+                                "travels": {
+                                    "detail": {
+                                        "route": "TravelDetails"
+                                    }
+                                },
                                 "leaves": {
                                     "detail": {
                                         "route": "LeaveDetails"

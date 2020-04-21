@@ -83,10 +83,7 @@ annotate my.Travels with @(UI : {
         Target : '@UI.FieldGroup#Times'
     }
     ],
-    FieldGroup #General : {Data : [
-    {Value : project},
-    {Value : employee}
-    ]},
+    FieldGroup #General : {Data : [{Value : project_ID}]},
     FieldGroup #Dates   : {Data : [
     {Value : dateFrom},
     {Value : dateTo},
@@ -97,6 +94,7 @@ annotate my.Travels with @(UI : {
     {Value : durationUnit}
     ]},
     LineItem            : [
+    {Value : project.title},
     {Value : dateFrom},
     {Value : dateTo},
     {Value : journey},
@@ -125,6 +123,18 @@ annotate my.ProjectMembers with @(UI : {
 });
 
 annotate my.ProjectMembers with {
+    ID      @UI.Hidden;
+    project @(
+        Common    : {
+            Text         : project.title,
+            FieldControl : #Mandatory
+        },
+        ValueList : {entity : 'Projects'},
+        title     : '{i18n>Project}'
+    );
+}
+
+annotate my.Travels with {
     ID      @UI.Hidden;
     project @(
         Common    : {

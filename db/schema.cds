@@ -81,23 +81,22 @@ entity Packages : cuid, managed {
 }
 
 entity Travels : cuid, managed {
-  daysOfTravel  : Integer                      @readonly  @title : '{i18n>Travels.daysOfTravel}';
-  dateFrom      : Date                         @title :            '{i18n>Travels.dateFrom}';
-  dateTo        : Date                         @title :            '{i18n>Travels.dateTo}';
-  returnJourney : Decimal(4, 2)                @title :            '{i18n>Travels.returnJourney}';
-  journey       : Decimal(4, 2)                @title :            '{i18n>Travels.journey}';
-  durationUnit  : String default 'h'           @readonly  @title : '{i18n>Travels.durationUnit}';
-  project       : Association to one Projects  @title :            '{i18n>Travels.project}';
-  employee      : Association to one Employees @title :            '{i18n>Travels.employee}';
+  daysOfTravel  : Integer                      @readonly  @title  : '{i18n>Travels.daysOfTravel}';
+  dateFrom      : Date                         @mandatory  @title : '{i18n>Travels.dateFrom}';
+  dateTo        : Date                         @title :             '{i18n>Travels.dateTo}';
+  journey       : Decimal(4, 2)                @mandatory  @title : '{i18n>Travels.journey}';
+  returnJourney : Decimal(4, 2)                @mandatory  @title : '{i18n>Travels.returnJourney}';
+  durationUnit  : String default 'h'           @readonly  @title  : '{i18n>Travels.durationUnit}';
+  project       : Association to one Projects  @title :             '{i18n>Travels.project}';
+  employee      : Association to one Employees @title :             '{i18n>Travels.employee}';
 }
 
 entity Leaves : cuid, managed {
-  reason      : LeaveReason                  @title :            '{i18n>Leaves.reason}';
-  dateFrom    : Date
-                                             @title :            '{i18n>Leaves.dateFrom}';
-  dateTo      : Date                         @title :            '{i18n>Leaves.dateTo}';
-  daysOfLeave : Integer                      @readonly  @title : '{i18n>Leaves.daysOfLeave}';
-  employee    : Association to one Employees @title :            '{i18n>Leaves.employee}';
+  reason      : LeaveReason                  @title :             '{i18n>Leaves.reason}';
+  dateFrom    : Date                         @mandatory  @title : '{i18n>Leaves.dateFrom}';
+  dateTo      : Date                         @title :             '{i18n>Leaves.dateTo}';
+  daysOfLeave : Integer                      @readonly  @title  : '{i18n>Leaves.daysOfLeave}';
+  employee    : Association to one Employees @title :             '{i18n>Leaves.employee}';
 }
 
 type LeaveReason : String enum {

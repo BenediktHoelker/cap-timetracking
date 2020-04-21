@@ -14,7 +14,7 @@ service TimetrackingService {
             end as status @(title : '{i18n>Records.status}') : String
         }
         order by
-            createdAt desc;
+            Records.createdAt desc;
 
     entity Projects       as
         select from my.Projects {
