@@ -4,15 +4,11 @@ service RecordsService {
     @odata.draft.enabled
     entity Records @(restrict : [
     {
-        grant : [
-            'READ'
-        ],
+        grant : ['READ'],
         to    : 'admin'
     },
     {
-        grant : [
-            'READ'
-        ],
+        grant : ['READ'],
         where : 'createdBy = $user'
     },
     ])                  as projection on my.Records actions {

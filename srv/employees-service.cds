@@ -2,7 +2,19 @@ using {TimetrackingService as my} from './timetracking-service';
 
 service EmployeesService {
     @odata.draft.enabled
-    entity Employees      as projection on my.Employees;
+    entity Employees @(restrict : [
+    {
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : 'admin'
+    },
+    {
+        grant : 'READ',
+        where : 'username = $user'
+    },
+    ])                    as projection on my.Employees;
 
     entity Projects       as projection on my.Projects;
     entity Records        as projection on my.Records;

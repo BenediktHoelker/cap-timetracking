@@ -1,6 +1,6 @@
 using {TimetrackingService as my} from './timetracking-service';
 
-service CustomersService {
+service CustomersService @(requires : 'admin') {
     entity Records   as select from my.Records;
 
     @odata.draft.enabled

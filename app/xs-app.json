@@ -1,6 +1,5 @@
 {
     "welcomeFile": "/app/index.html",
-    "authenticationMethod": "none",
     "routes": [
         {
             "source": "^/app/(.*)$",
@@ -12,4 +11,4 @@
             "destination": "srv_api"
         }
     ]
-}
+}   
