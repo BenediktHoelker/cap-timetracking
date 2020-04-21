@@ -1,17 +1,15 @@
 const cds = require("@sap/cds");
+const { Leaves } = cds.entities;
 
 module.exports = (srv) => {
-  srv.after(
-    "READ",
-    "Leaves",
-    (each) => (each.daysOfLeave = getDaysBetween(each))
-  );
-
-  srv.after(
-    "READ",
-    "Travels",
-    (each) => (each.daysOfTravel = getDaysBetween(each))
-  );
+  srv.before(["CREATE", "UPDATE"], "Employees", (req) => {
+    req.data.leaves.forEach(
+      (leave) => (leave.daysOfLeave = getDaysBetween(leave))
+    );
+    req.data.travels.forEach(
+      (travel) => (travel.daysOfTravel = getDaysBetween(travel))
+    );
+  });
 };
 
 function getDaysBetween({ dateFrom, dateTo }) {

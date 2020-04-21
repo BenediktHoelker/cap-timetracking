@@ -85,6 +85,7 @@ annotate my.Travels with @(UI : {
     ],
     FieldGroup #General : {Data : [{Value : project_ID}]},
     FieldGroup #Dates   : {Data : [
+    {Value : daysOfTravel},
     {Value : dateFrom},
     {Value : dateTo},
     ]},
@@ -95,6 +96,7 @@ annotate my.Travels with @(UI : {
     ]},
     LineItem            : [
     {Value : project.title},
+    {Value : daysOfTravel},
     {Value : dateFrom},
     {Value : dateTo},
     {Value : journey},
