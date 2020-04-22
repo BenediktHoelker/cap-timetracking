@@ -88,12 +88,12 @@ entity Packages : cuid, managed {
 entity Travels : cuid, managed {
   daysOfTravel  : Integer                      @readonly  @title  : '{i18n>Travels.daysOfTravel}';
   dateFrom      : Date                         @mandatory  @title : '{i18n>Travels.dateFrom}';
-  dateTo        : Date                         @title :             '{i18n>Travels.dateTo}';
-  journey       : Decimal(4, 2)                @mandatory  @title : '{i18n>Travels.journey}';
+  dateTo        : Date                         @title    :          '{i18n>Travels.dateTo}';
+  journey       : Decimal(4, 2)                @Measures :          durationUnit  @mandatory  @title : '{i18n>Travels.journey}';
   returnJourney : Decimal(4, 2)                @mandatory  @title : '{i18n>Travels.returnJourney}';
   durationUnit  : String default 'h'           @readonly  @title  : '{i18n>Travels.durationUnit}';
-  project       : Association to one Projects  @title :             '{i18n>Travels.project}';
-  employee      : Association to one Employees @title :             '{i18n>Travels.employee}';
+  project       : Association to one Projects  @title    :          '{i18n>Travels.project}';
+  employee      : Association to one Employees @title    :          '{i18n>Travels.employee}';
 }
 
 entity TravelAggregations as
