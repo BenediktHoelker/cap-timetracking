@@ -44,7 +44,8 @@ entity Employees : cuid, managed {
   daysOfLeave   : Integer @title : '{i18n>Employees.daysOfLeave}';
   billingTime   : Integer @title : '{i18n>Employees.billingTime}';
   bonus         : Integer @title : '{i18n>Employees.bonus}';
-
+  manager       : Association to one Employees;
+  @title                         : '{i18n>Employees.manager}'
   travels       : Composition of many Travels
                     on travels.employee = $self;
   travelAggr    : Association to one TravelAggregations
@@ -111,6 +112,11 @@ entity Leaves : cuid, managed {
   dateFrom    : Date                         @mandatory  @title : '{i18n>Leaves.dateFrom}';
   dateTo      : Date                         @title :             '{i18n>Leaves.dateTo}';
   daysOfLeave : Integer                      @readonly  @title  : '{i18n>Leaves.daysOfLeave}';
+  status      : String                       @title :             '{i18n>Leaves.status}'
+  enum {
+    INITIAL;
+    AUTHORIZED;
+  };
   employee    : Association to one Employees @title :             '{i18n>Leaves.employee}';
 }
 

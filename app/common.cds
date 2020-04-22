@@ -84,10 +84,15 @@ annotate my.Employees with @(UI : {
     {Value : recordsCount},
     {Value : billingTime},
     {Value : bonus},
+    {
+        Value : manager.name,
+        Label : '{i18n>Employee.manager}'
+    },
     {Value : leaveAggr.daysOfLeave},
     {Value : travelAggr.daysOfTravel}
     ]
 });
+
 
 annotate my.Employees with {
     ID @UI.Hidden;

@@ -23,8 +23,25 @@ annotate my.Employees with @(UI : {
         Target : 'leaves/@UI.LineItem'
     }
     ],
-    FieldGroup #General : {Data : [{Value : name}]}
+    FieldGroup #General : {Data : [
+    {Value : name},
+    {
+        Value : manager_ID,
+        Label : '{i18n>Manager}'
+    }
+    ]}
 });
+
+annotate my.Employees with {
+    ID      @UI.Hidden;
+    manager @(
+        Common    : {
+            Text         : manager.name,
+            FieldControl : #Mandatory
+        },
+        ValueList : {entity : 'Employees'}
+    );
+}
 
 annotate my.Leaves with @(UI : {
     HeaderInfo          : {
