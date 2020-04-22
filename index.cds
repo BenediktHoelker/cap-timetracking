@@ -1,7 +1,3 @@
-/*
-  This model controls what gets served to Fiori frontends...
-*/
-
 using from './db/schema';
 using from './srv/customers-service';
 using from './srv/employees-service';
