@@ -1,6 +1,3 @@
-const cds = require("@sap/cds");
-const { EmployeesToProjects } = cds.entities;
-
 module.exports = (srv) => {
   srv.before(["CREATE", "UPDATE"], "Employees", (req) => {
     const projectMembers = req.data.projects;
