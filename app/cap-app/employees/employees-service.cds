@@ -110,8 +110,8 @@ annotate my.ProjectMembers with @(UI : {
         TypeNamePlural : '{i18n>Projects}',
         Title          : {Value : project.title}
     },
-    Identification      : [{Value : project_ID}],
-    SelectionFields     : [project_ID],
+    Identification      : [{Value : title}],
+    SelectionFields     : [title],
     LineItem            : [{
         Value : project.title,
         Label : '{i18n>Project}'

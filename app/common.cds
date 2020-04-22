@@ -89,6 +89,10 @@ annotate my.Employees with @(UI : {
     ]
 });
 
+annotate my.Employees with {
+    ID @UI.Hidden;
+}
+
 annotate my.Customers with @(UI : {
     HeaderInfo      : {
         TypeName       : '{i18n>Customer}',
@@ -105,4 +109,47 @@ annotate my.Customers with @(UI : {
 
 annotate my.Customers with {
     ID @UI.Hidden;
+}
+
+annotate my.ProjectMembers with @(UI : {
+    HeaderInfo          : {
+        TypeName       : '{i18n>ProjectMember}',
+        TypeNamePlural : '{i18n>ProjectMembers}',
+        Title          : {Value : projectMember}
+    },
+    Identification      : [{Value : projectMember}],
+    SelectionFields     : [projectMember],
+    LineItem            : [{
+        Value : projectMember,
+        Label : '{i18n>Project}'
+    }],
+    Facets              : [{
+        $Type  : 'UI.ReferenceFacet',
+        Label  : '{i18n>General}',
+        Target : '@UI.FieldGroup#General'
+    }],
+    FieldGroup #General : {Data : [
+    {Value : project_ID},
+    {Value : employee_ID}
+    ]}
+});
+
+annotate my.ProjectMembers with {
+    ID       @UI.Hidden;
+    project  @(
+        Common    : {
+            Text         : title,
+            FieldControl : #Mandatory
+        },
+        ValueList : {entity : 'Projects'},
+        title     : '{i18n>Project}'
+    );
+    employee @(
+        Common    : {
+            Text         : name,
+            FieldControl : #Mandatory
+        },
+        ValueList : {entity : 'Employees'},
+        title     : '{i18n>Employee}'
+    );
 }
