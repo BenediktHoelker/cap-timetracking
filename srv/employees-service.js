@@ -6,9 +6,20 @@ module.exports = (srv) => {
     req.data.leaves.forEach(
       (leave) => (leave.daysOfLeave = getDaysBetween(leave))
     );
+
     req.data.travels.forEach(
       (travel) => (travel.daysOfTravel = getDaysBetween(travel))
     );
+
+    // req.data.daysOfLeave = req.data.leaves.reduce(
+    //   (acc, curr) => acc + curr.daysOfLeave,
+    //   0
+    // );
+
+    // req.data.daysOfTravel = req.data.travels.reduce(
+    //   (acc, curr) => acc + curr.daysOfTravel,
+    //   0
+    // );
   });
 };
 

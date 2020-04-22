@@ -44,10 +44,15 @@ entity Employees : cuid, managed {
   daysOfLeave   : Integer @title : '{i18n>Employees.daysOfLeave}';
   billingTime   : Integer @title : '{i18n>Employees.billingTime}';
   bonus         : Integer @title : '{i18n>Employees.bonus}';
+
   travels       : Composition of many Travels
                     on travels.employee = $self;
+  travelAggr    : Association to one TravelAggregations
+                    on travelAggr.employee = $self;
   leaves        : Composition of many Leaves
                     on leaves.employee = $self;
+  leaveAggr     : Association to one LeaveAggregations
+                    on leaveAggr.employee = $self;
   projects      : Composition of many EmployeesToProjects
                     on projects.employee = $self;
   records       : Association to many Records
@@ -91,6 +96,16 @@ entity Travels : cuid, managed {
   employee      : Association to one Employees @title :             '{i18n>Travels.employee}';
 }
 
+entity TravelAggregations as
+  select from Travels {
+    key employee,
+        sum(
+          daysOfTravel
+        ) as daysOfTravel @(title : '{i18n>Travels.daysOfTravel}') : Integer
+  }
+  group by
+    employee;
+
 entity Leaves : cuid, managed {
   reason      : LeaveReason                  @title :             '{i18n>Leaves.reason}';
   dateFrom    : Date                         @mandatory  @title : '{i18n>Leaves.dateFrom}';
@@ -98,6 +113,16 @@ entity Leaves : cuid, managed {
   daysOfLeave : Integer                      @readonly  @title  : '{i18n>Leaves.daysOfLeave}';
   employee    : Association to one Employees @title :             '{i18n>Leaves.employee}';
 }
+
+entity LeaveAggregations  as
+  select from Leaves {
+    key employee,
+        sum(
+          daysOfLeave
+        ) as daysOfLeave @(title : '{i18n>Leaves.daysOfLeave}') : Integer
+  }
+  group by
+    employee;
 
 type LeaveReason : String enum {
   Vacation;
@@ -132,7 +157,7 @@ entity InvoiceItems : cuid, managed {
   record  : Association to one Records;
 }
 
-entity InvoicesView as
+entity InvoicesView       as
   select from timetracking.Invoices {
     *,
     sum(

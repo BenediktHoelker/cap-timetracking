@@ -83,6 +83,8 @@ annotate my.Employees with @(UI : {
     {Value : name},
     {Value : recordsCount},
     {Value : billingTime},
-    {Value : bonus}
+    {Value : bonus},
+    {Value : leaveAggr.daysOfLeave},
+    {Value : travelAggr.daysOfTravel}
     ]
 });
