@@ -11,11 +11,7 @@ entity Records : cuid, managed {
   time          : Decimal(4, 2)                          @title :            '{i18n>Records.time}';
   timeUnit      : String default 'h'                     @readonly  @title : '{i18n>Records.timeUnit}';
   date          : Date                                   @title :            '{i18n>Records.date}';
-  status        : String                                 @title :            '{i18n>Records.status}'
-  enum {
-    INITIAL;
-    BILLED;
-  };
+  status        : String default 'INITIAL'               @title :            '{i18n>Records.status}';
   invoiceItem   : Association to one InvoiceItems
                     on invoiceItem.record = $self        @title :            '{i18n>Records.invoiceItem}';
   projectMember : Association to one EmployeesToProjects @title :            '{i18n>Records.projectMember}';
@@ -46,11 +42,11 @@ entity Employees : cuid, managed {
   bonus         : Integer @title : '{i18n>Employees.bonus}';
   manager       : Association to one Employees;
   @title                         : '{i18n>Employees.manager}'
-  travels       : Composition of many Travels
+  travels       : Association to many Travels
                     on travels.employee = $self;
   travelAggr    : Association to one TravelAggregations
                     on travelAggr.employee = $self;
-  leaves        : Composition of many Leaves
+  leaves        : Association to many Leaves
                     on leaves.employee = $self;
   leaveAggr     : Association to one LeaveAggregations
                     on leaveAggr.employee = $self;
@@ -108,15 +104,11 @@ entity TravelAggregations as
     employee;
 
 entity Leaves : cuid, managed {
-  reason      : LeaveReason                  @title :             '{i18n>Leaves.reason}';
+  reason      : String                       @title :             '{i18n>Leaves.reason}';
   dateFrom    : Date                         @mandatory  @title : '{i18n>Leaves.dateFrom}';
   dateTo      : Date                         @title :             '{i18n>Leaves.dateTo}';
   daysOfLeave : Integer                      @readonly  @title  : '{i18n>Leaves.daysOfLeave}';
-  status      : String                       @title :             '{i18n>Leaves.status}'
-  enum {
-    INITIAL;
-    AUTHORIZED;
-  };
+  status      : String default 'INITIAL'     @title :             '{i18n>Leaves.status}';
   employee    : Association to one Employees @title :             '{i18n>Leaves.employee}';
 }
 
@@ -129,11 +121,6 @@ entity LeaveAggregations  as
   }
   group by
     employee;
-
-type LeaveReason : String enum {
-  Vacation;
-  Illness
-}
 
 view CustomersView as
   select from timetracking.Customers {

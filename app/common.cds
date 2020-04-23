@@ -158,3 +158,35 @@ annotate my.ProjectMembers with {
         title     : '{i18n>Employee}'
     );
 }
+
+annotate my.Leaves with @(UI : {
+    HeaderInfo          : {
+        TypeName       : '{i18n>Leave}',
+        TypeNamePlural : '{i18n>Leaves}',
+        Title          : {Value : reason}
+    },
+    Facets              : [
+    {
+        $Type  : 'UI.ReferenceFacet',
+        Label  : '{i18n>General}',
+        Target : '@UI.FieldGroup#General'
+    },
+    {
+        $Type  : 'UI.ReferenceFacet',
+        Label  : '{i18n>Leaves.Dates}',
+        Target : '@UI.FieldGroup#Dates'
+    }
+    ],
+    FieldGroup #General : {Data : [{Value : reason}, ]},
+    FieldGroup #Dates   : {Data : [
+    {Value : dateFrom},
+    {Value : dateTo},
+    {Value : daysOfLeave},
+    ]},
+    LineItem            : [
+    {Value : reason},
+    {Value : daysOfLeave},
+    {Value : dateFrom},
+    {Value : dateTo}
+    ]
+});
